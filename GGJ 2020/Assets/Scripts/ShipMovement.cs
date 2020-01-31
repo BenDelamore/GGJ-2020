@@ -5,13 +5,12 @@ public class ShipMovement : MonoBehaviour
     public GameObject core;
 
     public float velocityMag;
-    // Start is called before the first frame update
+   
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         velocityMag = core.GetComponent<Rigidbody2D>().velocity.magnitude;
