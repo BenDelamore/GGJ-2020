@@ -16,7 +16,7 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        thrustForce = core.GetComponent<Rigidbody2D>().velocity.magnitude;
+        velocityMag = core.GetComponent<Rigidbody2D>().velocity.magnitude;
 
         Forwards();
     }
