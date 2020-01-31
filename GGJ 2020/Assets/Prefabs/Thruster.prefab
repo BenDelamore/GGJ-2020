@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5480047163558712176}
   - component: {fileID: 5480047163558712183}
   - component: {fileID: 8237481105545415251}
+  - component: {fileID: 5991534814918784256}
   m_Layer: 0
   m_Name: Thruster
   m_TagString: Untagged
@@ -168,3 +169,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustForce: 10
+--- !u!114 &5991534814918784256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480047163558712181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b834be3fc8b64646ad2cd0713bf4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

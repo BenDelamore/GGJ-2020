@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7409487632294368407}
   - component: {fileID: 7409487632294368400}
+  - component: {fileID: 5940620568740526719}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7409487632451594225}
   - {fileID: 7409487632712918113}
+  - {fileID: 7409487632451594225}
   - {fileID: 212359184275933102}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -47,8 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 7409487632712918109}
-  thrustForce: 10
   velocityMag: 0
+--- !u!114 &5940620568740526719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409487632294368401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca64b2177cbfbb4ba4858439f03bd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7409487632712918109
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +92,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7409487632294368407}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7409487632712918114
 SpriteRenderer:
@@ -232,7 +244,7 @@ PrefabInstance:
     - target: {fileID: 5480047163558712182, guid: cd1a078aa5d3f664991dc7362e0403a0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5480047163558712182, guid: cd1a078aa5d3f664991dc7362e0403a0,
         type: 3}
