@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
+    public GameObject core;
+    public float thrustForce;
 
-    public float ThrustForce;
+    public float velocityMag;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +16,20 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        forwards();
+        thrustForce = core.GetComponent<Rigidbody2D>().velocity.magnitude;
+
+        Forwards();
     }
 
-    void forwards() {
+    void Forwards() {
         foreach (Transform child in transform) {
             if (child.name.Contains("Thruster")) {
-                applyForce(child.gameObject);
+                ApplyForce(child.gameObject);
             }
         }
     }
 
-    void applyForce(GameObject thruster) {
-        Debug.Log("here");
-        thruster.GetComponent<Rigidbody2D>().AddForce(thruster.transform.up * ThrustForce);
+    void ApplyForce(GameObject thruster) {
+        thruster.GetComponent<Rigidbody2D>().AddForce(thruster.transform.up * thrustForce);
     }
 }
