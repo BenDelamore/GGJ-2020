@@ -6,14 +6,12 @@ public class ShipMovement : MonoBehaviour
     public float thrustForce;
 
     public float velocityMag;
-    // Start is called before the first frame update
+   
     void Start()
     {
-        //foreach (Transform child in transform) {
-        //}
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
         velocityMag = core.GetComponent<Rigidbody2D>().velocity.magnitude;
