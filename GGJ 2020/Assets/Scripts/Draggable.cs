@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hover : MonoBehaviour
+public class Draggable : MonoBehaviour
 {
 
     private GameObject hoverScriptHolder;
 
     private void Start() {
-        hoverScriptHolder = transform.parent.gameObject;
+        hoverScriptHolder = GameObject.Find("Core");
     }
 
     private void OnMouseDrag() {
-        hoverScriptHolder.GetComponent<ShipBuilding>().HoveringOver(gameObject);
+        hoverScriptHolder.GetComponent<ShipBuilding>().DragStart(gameObject);
     }
-    
 }
