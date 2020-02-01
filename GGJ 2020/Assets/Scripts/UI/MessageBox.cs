@@ -85,6 +85,7 @@ public class MessageBox : MonoBehaviour
     void ShowBox()
     {
         rTransform.DOKill(true);
+        canvas.DOKill(true);
         canvas.DOFade(1f, 0.1f);
         rTransform.DOSizeDelta(new Vector2(670f, 128f), 0.5f).SetEase(Ease.OutQuint);
     }
@@ -97,6 +98,7 @@ public class MessageBox : MonoBehaviour
     void HideBox()
     {
         rTransform.DOKill(true);
+        canvas.DOKill(true);
         canvas.DOFade(0f, 0.25f).SetEase(Ease.OutQuad);
         rTransform.DOSizeDelta(new Vector2(150f, 128f), 0.4f).SetEase(Ease.OutQuad);
     }

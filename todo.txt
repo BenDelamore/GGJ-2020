@@ -1,0 +1,36 @@
+Thrusters on different sides of the ship take different inputs to thrust (W, A, S, D)
+Core can rotate
+Additional Gyros make you rotate faster
+Additional mass makes rotation slower
+dampening(?)
+turning on and off dampening(?)
+Parts have health and lose health as they are used
+Core has health
+Clicking and dragging items attaches and detaches them from your ship
+UI health indicators
+Dark coloured background
+Star/Nebula Sprites procedurally generated
+
+
+
+
+Shield
+Thruster
+Gyroscope
+Hull Expansion
+
+expansion gun?
+expansion auto rotation
+expansion power generator and power system
+
+
+priority list
+
+finished ui implementation
+finished art implementation
+health
+all parts connecting correctly
+repairing
+fixes to procedural seeded generator
+background
+rotating objects to place them
