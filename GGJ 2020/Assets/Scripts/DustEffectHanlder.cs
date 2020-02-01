@@ -18,7 +18,7 @@ public class DustEffectHanlder : MonoBehaviour
     void Update()
     {
         Vector2 motionDirection = transform.parent.parent.GetComponent<Rigidbody2D>().velocity.normalized;
-        transform.rotation = Quaternion.LookRotation(motionDirection, new Vector3(0, 0, 1));
+        if (motionDirection.magnitude > 0.1f) { transform.rotation = Quaternion.LookRotation(motionDirection, new Vector3(0, 0, 1)); }
         var main = ps.main;
         var emission = ps.emission;
         main.startSpeed = -shipMove.velocityMag;

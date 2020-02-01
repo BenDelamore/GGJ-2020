@@ -102,9 +102,9 @@ GameObject:
   - component: {fileID: 3460283964883322161}
   - component: {fileID: 5971200807490544925}
   - component: {fileID: 5078534149820049424}
-  - component: {fileID: 4975373377505982480}
   - component: {fileID: 4140982120072511614}
   - component: {fileID: 1163422047413476540}
+  - component: {fileID: 5908508705880313349}
   m_Layer: 0
   m_Name: Gyroscope
   m_TagString: Untagged
@@ -214,21 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b834be3fc8b64646ad2cd0713bf4362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4975373377505982480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2771026151846319809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6594fa2ed5dab42a45da525f6c4e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  UIelement: {fileID: 7765379706589174862}
-  rootNode: {fileID: 0}
 --- !u!61 &4140982120072511614
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -273,6 +258,21 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!114 &5908508705880313349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2771026151846319809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947f59986dd53ed469e6d605334c0734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  UIelement: {fileID: 7765379706589174862}
+  rootNode: {fileID: 0}
 --- !u!1 &6817043051990799442
 GameObject:
   m_ObjectHideFlags: 0
