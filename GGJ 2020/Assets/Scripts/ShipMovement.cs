@@ -2,14 +2,13 @@
 
 public class ShipMovement : MonoBehaviour
 {
-    public GameObject core;
     private Rigidbody2D thisRB;
 
     public float velocityMag;
    
     void Start()
     {
-        thisRB = core.GetComponent<Rigidbody2D>();
+        thisRB = GetComponent<Rigidbody2D>();
     }
 
     void Update()

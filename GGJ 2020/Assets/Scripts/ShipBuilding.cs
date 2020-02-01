@@ -22,7 +22,7 @@ public class ShipBuilding : MonoBehaviour
         }
     }
 
-    private void FixedUpdate() {
+    private void LateUpdate() {
         if (isDragging) {
             Dragging();
         }
@@ -43,7 +43,7 @@ public class ShipBuilding : MonoBehaviour
 
         draggedObject.transform.position = mousePos;
 
-        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x*1.25f)/ 1.25f, Mathf.Round(draggedObject.transform.localPosition.y * 1.25f) / 1.25f);
+        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x / 2.5f)* 2.5f, Mathf.Round(draggedObject.transform.localPosition.y / 2.5f) * 2.5f);
 
         draggedObject.transform.localPosition = gridPos;
         draggedObject.transform.rotation = gameObject.transform.rotation;
