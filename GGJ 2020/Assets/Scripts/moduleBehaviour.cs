@@ -8,7 +8,7 @@ public class moduleBehaviour : MonoBehaviour
     public GameObject UIelement;
     public GameObject rootNode;
 
-    public GameObject CanConnect(GameObject _node)
+    public GameObject CanConnect(GameObject _node, float rotation)
     {
         Transform oldParent = transform.parent;
         Vector3 oldLocalPosition = transform.localPosition;
@@ -16,7 +16,7 @@ public class moduleBehaviour : MonoBehaviour
 
         transform.parent = _node.GetComponent<nodeScript>().rootObject.transform;
         transform.localPosition = _node.transform.localPosition;
-        transform.localRotation = new Quaternion(0, 0, 0, 0);
+        transform.localRotation = Quaternion.Euler(0, 0, rotation);
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -50,9 +50,9 @@ public class moduleBehaviour : MonoBehaviour
     }
 
 
-    public void Connect(GameObject _node)
+    public void Connect(GameObject _node, float rotation)
     {
-        CanConnect(_node).GetComponent<nodeScript>().boundObject = _node.GetComponent<nodeScript>().rootObject;
+        CanConnect(_node, rotation).GetComponent<nodeScript>().boundObject = _node.GetComponent<nodeScript>().rootObject;
         _node.GetComponent<nodeScript>().boundObject = gameObject;
         rootNode = _node;
     }
@@ -72,6 +72,24 @@ public class moduleBehaviour : MonoBehaviour
             }
             rootNode.GetComponent<nodeScript>().boundObject = null;
             rootNode = null;
+        }
+        nodeScript[] nodes = GetComponentsInChildren<nodeScript>();
+        foreach (nodeScript script in nodes)
+        {
+            if (script.boundObject)
+            {
+                nodeScript[] nodeScriptsInBound = script.boundObject.GetComponentsInChildren<nodeScript>();
+                foreach (nodeScript scriptInBound in nodeScriptsInBound)
+                {
+                    if (scriptInBound.boundObject == gameObject)
+                    {
+                        scriptInBound.boundObject = null;
+                        break;
+                    }
+                }
+                script.boundObject = null;
+                break;
+            }
         }
     }
 
@@ -110,6 +128,7 @@ public class moduleBehaviour : MonoBehaviour
     {
         UIelement.transform.GetComponent<ModHealthUI>().showHealth = false;
     }
+
 
     private void OnDestroy()
     {

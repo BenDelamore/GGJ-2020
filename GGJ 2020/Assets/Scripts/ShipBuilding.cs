@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class ShipBuilding : MonoBehaviour
 {
-    bool isDragging = false;
+    public bool isDragging = false;
     bool snapToShip;
     GameObject draggedObject;
+    float rotation;
     GameObject closestNode;
 
     float shipOffset = 1.28f;
 
     void Update() {
         Time.timeScale = 1;
-
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            Time.timeScale = 0.1f;
-        }
 
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
@@ -25,6 +22,7 @@ public class ShipBuilding : MonoBehaviour
 
         if (isDragging)
         {
+            Time.timeScale = 0.1f;
             Dragging();
         }
     }
@@ -41,6 +39,20 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<BoxCollider2D>().enabled = false;
             draggedObject.transform.parent = null;
 
+            if (draggedObject.GetComponent<GyroscopeScript>())
+            {
+                if (draggedObject.GetComponent<GyroscopeScript>().rootNode)
+                {
+                    GetComponent<ShipScript>().gyroscopeCount--;
+                }
+            }
+            if (draggedObject.GetComponent<WarpCoreScript>())
+            {
+                if (draggedObject.GetComponent<WarpCoreScript>().rootNode)
+                {
+                    GetComponent<ShipScript>().warpCoreCount--;
+                }
+            }
             // tells the dragged object to Disconnect itself from the node
             draggedObject.GetComponent<moduleBehaviour>().Disconnect();
         }
@@ -72,6 +84,27 @@ public class ShipBuilding : MonoBehaviour
         }
         */
 
+
+        if (Input.GetKeyDown("q"))
+        {
+            rotation += 90.0f;
+            if (rotation == 450.0f)
+            {
+                rotation = 90.0f;
+            }
+        }
+        if (Input.GetKeyDown("e"))
+        {
+            rotation -= 90.0f;
+            if (rotation == -90.0f)
+            {
+                rotation = 270.0f;
+            }
+        }
+
+        draggedObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotation);
+
+
         GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
         closestNode = null;
         float closestDistance = Mathf.Infinity;
@@ -80,7 +113,7 @@ public class ShipBuilding : MonoBehaviour
             float distance = (draggedObject.transform.position - node.transform.position).magnitude;
             if ((closestNode == null || distance < closestDistance) && !node.GetComponent<nodeScript>().boundObject)
             {
-                if (draggedObject.GetComponent<moduleBehaviour>().CanConnect(node))
+                if (draggedObject.GetComponent<moduleBehaviour>().CanConnect(node, rotation))
                 {
                     closestNode = node;
                     closestDistance = distance;
@@ -149,13 +182,36 @@ public class ShipBuilding : MonoBehaviour
             nodeScript closestNodeScript = closestNode.GetComponent<nodeScript>();
             closestNodeScript.boundObject = draggedObject;
 
-            GameObject node = draggedObject.GetComponent<moduleBehaviour>().CanConnect(closestNode);
+            GameObject node = draggedObject.GetComponent<moduleBehaviour>().CanConnect(closestNode, rotation);
             node.GetComponent<nodeScript>().boundObject = closestNode.transform.parent.gameObject;
 
-            draggedObject.GetComponent<moduleBehaviour>().Connect(closestNode);
+            draggedObject.GetComponent<moduleBehaviour>().Connect(closestNode, rotation);
 
             draggedObject.GetComponent<BoxCollider2D>().enabled = true;
 
+            if (draggedObject.GetComponent<GyroscopeScript>())
+            {
+                GetComponent<ShipScript>().gyroscopeCount++;
+            }
+            if (draggedObject.GetComponent<WarpCoreScript>())
+            {
+                GetComponent<ShipScript>().warpCoreCount++;
+            }
+            if (draggedObject.GetComponent<ThrusterScript>())
+            {
+                if (rotation == 90.0f)
+                {
+                    draggedObject.GetComponent<ThrusterScript>().control = "a";
+                }
+                else if (rotation == 180.0f)
+                {
+                    draggedObject.GetComponent<ThrusterScript>().control = "s";
+                }
+                else if (rotation == 270.0f)
+                {
+                    draggedObject.GetComponent<ThrusterScript>().control = "d";
+                }
+            }
         }
 
 
@@ -167,6 +223,8 @@ public class ShipBuilding : MonoBehaviour
                 break;
             }
         }
+
+        rotation = 0.0f;
     }
 
     void Snap() {
@@ -189,11 +247,10 @@ public class ShipBuilding : MonoBehaviour
 
         draggedObject.transform.parent = closestNode.transform.parent;
         draggedObject.transform.localPosition = closestNode.transform.localPosition;
+        
 
         // All ogjects face forward
-        draggedObject.transform.localRotation = new Quaternion(0,0,0,0);
-        draggedObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        draggedObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+        draggedObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, rotation);
 
     }
 

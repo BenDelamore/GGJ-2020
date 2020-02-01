@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 0}
-  shipHealthModule: {fileID: 0}
+  shipHealthModule: {fileID: 5354135217347216922}
   shipSpeedModule: {fileID: 4218383845427486117}
   timeLeftModule: {fileID: 0}
   distanceModule: {fileID: 0}
