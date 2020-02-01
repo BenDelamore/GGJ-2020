@@ -13,23 +13,16 @@ public class ThrusterScript : MonoBehaviour
         health = 100.0f;
         UIelement = transform.GetChild(0).gameObject;
         UIelement.transform.SetParent(GameObject.Find("Canvas").transform);
-        UIelement.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        //UIelement.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
     }
 
     private void Update()
     {
         Vector3 worldToScreen = Camera.main.WorldToScreenPoint(transform.position);
         GameObject canvas = GameObject.Find("Canvas");
-        //Vector3 worldToScreen = WorldToCanvasPosition(canvas.GetComponent<Canvas>(), canvas.GetComponent<RectTransform>(), Camera.main, transform.position);
+        worldToScreen.x -= canvas.GetComponent<Canvas>().pixelRect.width * 0.5f;
+        worldToScreen.y -= canvas.GetComponent<Canvas>().pixelRect.height * 0.5f;
         UIelement.transform.localPosition = worldToScreen;
-    }
-
-    Vector2 WorldToCanvasPosition(Canvas canvas, RectTransform canvasRect, Camera camera, Vector3 position)
-    {
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(camera, position);
-        Vector2 result;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : camera, out result);
-        return canvas.transform.TransformPoint(result);
     }
 
 

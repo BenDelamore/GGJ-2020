@@ -104,7 +104,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrustForce: 100000
   health: 0
+  UIelement: {fileID: 0}
 --- !u!114 &547350546504862419
 MonoBehaviour:
   m_ObjectHideFlags: 0
