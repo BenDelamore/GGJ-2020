@@ -6,18 +6,6 @@ public class AudioController : MonoBehaviour
 {
     public GameObject audioSource;
 
-    public AudioClip ambience;
-    public AudioClip click;
-    public AudioClip hit1;
-    public AudioClip hit2;
-    public AudioClip interfaceSelect;
-    public AudioClip notification;
-    public AudioClip tap;
-    public AudioClip thruster;
-    public AudioClip win1;
-    public AudioClip win2;
-    public AudioClip win3;
-
     private float[] defaultRange;
 
     void Start() {
