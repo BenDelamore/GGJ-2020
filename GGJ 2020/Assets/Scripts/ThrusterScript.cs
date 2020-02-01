@@ -6,7 +6,7 @@ public class ThrusterScript : MonoBehaviour
 {
     public float thrustForce;
     public float health;
-    private GameObject UIelement;
+    public GameObject UIelement;
 
     private void Start()
     {
