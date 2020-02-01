@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9162199932413674864}
   - component: {fileID: 9162199932413674867}
   - component: {fileID: 4132383556784581166}
+  - component: {fileID: 7503456073285731726}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -61,7 +62,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -158,3 +159,28 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &7503456073285731726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162199932413674865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ba3f2ed56a5664c94e712aa41a7497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 3319992287479830819, guid: 9077be313ed0ec14691d869c1b1a7b56,
+    type: 3}
+  ambience: {fileID: 0}
+  click: {fileID: 0}
+  hit1: {fileID: 0}
+  hit2: {fileID: 0}
+  interfaceSelect: {fileID: 0}
+  notification: {fileID: 0}
+  tap: {fileID: 0}
+  thruster: {fileID: 0}
+  win1: {fileID: 0}
+  win2: {fileID: 0}
+  win3: {fileID: 0}

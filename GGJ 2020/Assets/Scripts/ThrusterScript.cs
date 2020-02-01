@@ -6,6 +6,8 @@ public class ThrusterScript : moduleBehaviour
 {
     public float thrustForce;
     public string control = "w";
+    public AudioClip thrusterSound;
+    public GameObject cam;
 
     private void Update()
     {
@@ -14,6 +16,13 @@ public class ThrusterScript : moduleBehaviour
             if (Input.GetKey(control))
             {
                 Thrust();
+            }
+            else {
+                foreach(Transform child in transform) {
+                    if (child.name.Contains("Audio")) {
+                        child.GetComponent<AudioSource>().Stop();
+                    }
+                }
             }
             //if (Input.GetKey("w") && transform.localRotation.eulerAngles.z <= 5.0f && transform.localRotation.eulerAngles.z >= -5.0f)
             //{
@@ -52,6 +61,8 @@ public class ThrusterScript : moduleBehaviour
 
     public void Thrust()
     {
+        cam.GetComponent<AudioController>().PlaySoundAt(thrusterSound,transform,0.5f);
+
         GetComponent<Rigidbody2D>().AddForce(transform.up * thrustForce * Time.deltaTime);
         health -= 0.125f;
         if (health <= 0.0f)
