@@ -7,6 +7,7 @@ public class ShipBuilding : MonoBehaviour
     bool isDragging = false;
     bool snapToShip;
     GameObject draggedObject;
+    GameObject closestNode;
 
     float shipOffset = 1.28f;
 
@@ -17,15 +18,18 @@ public class ShipBuilding : MonoBehaviour
             Time.timeScale = 0.1f;
         }
 
-        if (Input.GetMouseButtonUp(0) && isDragging ==true) {
+        if (Input.GetMouseButtonUp(0) && isDragging)
+        {
             DragStop();
+        }
+
+        if (isDragging)
+        {
+            Dragging();
         }
     }
 
     private void LateUpdate() {
-        if (isDragging) {
-            Dragging();
-        }
     }
 
     public void DragStart(GameObject part) {
@@ -36,6 +40,9 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
             draggedObject.GetComponent<BoxCollider2D>().enabled = false;
             draggedObject.transform.parent = null;
+
+            // tells the dragged object to Disconnect itself from the node
+            draggedObject.GetComponent<moduleBehaviour>().Disconnect();
         }
     }
 
@@ -46,7 +53,7 @@ public class ShipBuilding : MonoBehaviour
 
         draggedObject.transform.position = mousePos;
 
-
+        /*
         //check if near children
         foreach (Transform child in transform) {
             if (Within(mousePos, child.transform.position, 3.75f, 3.75f) && child.gameObject != draggedObject) {
@@ -63,8 +70,30 @@ public class ShipBuilding : MonoBehaviour
         if (snapToShip == false && Within(mousePos, transform.position + transform.up * shipOffset, 3.75f, 5.12f) == true) {
             snapToShip = true;
         }
+        */
 
-        if (snapToShip == true) {
+        GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
+        closestNode = null;
+        float closestDistance = Mathf.Infinity;
+        foreach (GameObject node in snapNodes)
+        {
+            float distance = (draggedObject.transform.position - node.transform.position).magnitude;
+            if ((closestNode == null || distance < closestDistance) && !node.GetComponent<nodeScript>().boundObject)
+            {
+                if (draggedObject.GetComponent<moduleBehaviour>().CanConnect(node))
+                {
+                    closestNode = node;
+                    closestDistance = distance;
+                }
+            }
+        }
+
+        if (closestDistance <= 3.75f)
+        {
+            snapToShip = true;
+        }
+
+        if (snapToShip) {
             Snap();
         }
     }
@@ -76,6 +105,7 @@ public class ShipBuilding : MonoBehaviour
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        /*
         foreach (Transform child in transform) {
             if (Within(mousePos, child.transform.position, 1.25f, 1.25f) && child.gameObject != draggedObject) {
                 repair(child.gameObject);
@@ -89,13 +119,43 @@ public class ShipBuilding : MonoBehaviour
                 repaired = true;
             }
         }
-
+        */
         
-        if (snapToShip == true) {
-            draggedObject.GetComponent<BoxCollider2D>().enabled = true;
+        if (snapToShip) {
+            // get the closest node to the mouse position and set the object to it's position
+
+            /*
+            GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
+            GameObject closest = null;
+            float closestDistance = Mathf.Infinity;
+            foreach (GameObject node in snapNodes)
+            {
+                float distance = (draggedObject.transform.position - node.transform.position).magnitude;
+                if ((closest == null || distance < closestDistance) && !node.GetComponent<nodeScript>().boundObject)
+                {
+                    closest = node;
+                    closestDistance = distance;
+                }
+            }
+            */
+
+
+            // Sets the core as the parent
+            Snap();
             draggedObject.GetComponent<FixedJoint2D>().enabled = true;
-            draggedObject.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
-            draggedObject.transform.parent = transform;
+            draggedObject.GetComponent<FixedJoint2D>().connectedBody = closestNode.transform.parent.GetComponent<Rigidbody2D>();
+
+            // Updates the node
+            nodeScript closestNodeScript = closestNode.GetComponent<nodeScript>();
+            closestNodeScript.boundObject = draggedObject;
+
+            GameObject node = draggedObject.GetComponent<moduleBehaviour>().CanConnect(closestNode);
+            node.GetComponent<nodeScript>().boundObject = closestNode.transform.parent.gameObject;
+
+            draggedObject.GetComponent<moduleBehaviour>().Connect(closestNode);
+
+            draggedObject.GetComponent<BoxCollider2D>().enabled = true;
+
         }
 
 
@@ -104,19 +164,37 @@ public class ShipBuilding : MonoBehaviour
             if (!collider.isTrigger)
             {
                 collider.enabled = true;
+                break;
             }
-            break;
         }
     }
 
     void Snap() {
-        draggedObject.transform.parent = transform;
+        /*
+        GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
+        GameObject closest = null;
+        float closestDistance = Mathf.Infinity;
+        foreach (GameObject node in snapNodes)
+        {
+            float distance = (draggedObject.transform.position - node.transform.position).magnitude;
+            if (closest == null || distance < closestDistance)
+            {
+                closest = node;
+                closestDistance = distance;
+            }
+        }
+        */
 
-        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x / 2.56f) * 2.56f, Mathf.Round((draggedObject.transform.localPosition.y) / 2.56f) * 2.56f);
+        //Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x / 2.56f) * 2.56f, Mathf.Round((draggedObject.transform.localPosition.y) / 2.56f) * 2.56f);
 
-        draggedObject.transform.localPosition = gridPos;
+        draggedObject.transform.parent = closestNode.transform.parent;
+        draggedObject.transform.localPosition = closestNode.transform.localPosition;
 
+        // All ogjects face forward
         draggedObject.transform.localRotation = new Quaternion(0,0,0,0);
+        draggedObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        draggedObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+
     }
 
     void repair(GameObject target) {

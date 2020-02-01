@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 600897270}
   m_Layer: 5
   m_Name: ModuleHealth
-  m_TagString: Untagged
+  m_TagString: HealthUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHealth: 0
   healthValue: 100
+  Module: {fileID: 0}
 --- !u!225 &600897270
 CanvasGroup:
   m_ObjectHideFlags: 0

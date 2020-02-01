@@ -24,9 +24,9 @@ public class ModHealthUI : MonoBehaviour
 
     void Update()
     {
-        if (Module.GetComponent<ThrusterScript>())
+        if (Module.GetComponent<moduleBehaviour>())
         {
-            healthValue = Module.GetComponent<ThrusterScript>().health;
+            healthValue = Module.GetComponent<moduleBehaviour>().health;
         }
         healthRing.fillAmount = healthValue / 100f;
 

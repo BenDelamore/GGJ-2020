@@ -2,37 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldScript : MonoBehaviour
+public class ShieldScript : moduleBehaviour
 {
     public float pushForce;
-    public float health;
-    public GameObject UIelement;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = 100.0f;
-        UIelement = transform.GetChild(0).gameObject;
-        UIelement.transform.SetParent(GameObject.Find("Canvas").transform);
-    }
-
-    private void Update()
-    {
-        Vector3 worldToScreen = Camera.main.WorldToScreenPoint(transform.position);
-        GameObject canvas = GameObject.Find("Canvas");
-        worldToScreen.x -= canvas.GetComponent<Canvas>().pixelRect.width * 0.5f;
-        worldToScreen.y -= canvas.GetComponent<Canvas>().pixelRect.height * 0.5f;
-        UIelement.transform.localPosition = worldToScreen;
-    }
-    private void OnMouseEnter()
-    {
-        UIelement.transform.GetComponent<ModHealthUI>().showHealth = true;
-    }
-
-    private void OnMouseExit()
-    {
-        UIelement.transform.GetComponent<ModHealthUI>().showHealth = false;
-    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -50,7 +22,7 @@ public class ShieldScript : MonoBehaviour
                     otherRB.AddForce(force);
                     if (health <= 0.0f)
                     {
-                        this.gameObject.SetActive(false);
+                        Destroy(gameObject);
                     }
                 }
             }
