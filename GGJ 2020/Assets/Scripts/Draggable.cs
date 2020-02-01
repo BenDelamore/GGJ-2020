@@ -18,7 +18,7 @@ public class Draggable : MonoBehaviour
     }
 
     private void Update() {
-        coreConnection();
+        //coreConnection();
     }
 
     void coreConnection() {
