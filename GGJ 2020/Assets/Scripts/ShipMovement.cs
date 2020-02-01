@@ -2,22 +2,44 @@
 
 public class ShipMovement : MonoBehaviour
 {
+    public GameObject core;
+    private Rigidbody2D thisRB;
+
     public float velocityMag;
    
     void Start()
     {
-
+        thisRB = core.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        velocityMag = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        velocityMag = thisRB.velocity.magnitude;
 
+        if (Input.GetKey("q"))
+        {
+            thisRB.AddTorque(10.0f);
+        }
+        if (Input.GetKey("e"))
+        {
+            thisRB.AddTorque(-10.0f);
+        }
         if (Input.GetKey("w"))
         {
             Forwards();
         }
 
+        if (Input.GetKey("s"))
+        {
+        }
+
+        if (Input.GetKey("a"))
+        {
+        }
+
+        if (Input.GetKey("d"))
+        {
+        }
     }
 
     void Forwards()
