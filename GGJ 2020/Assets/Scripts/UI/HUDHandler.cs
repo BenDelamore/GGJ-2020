@@ -7,7 +7,7 @@ using DG.Tweening;
 public class HUDHandler : MonoBehaviour
 {
     public GameObject ship;
-    private ShipMovement shipMovement;
+    private ShipScript shipScript;
 
     private float shipHealth;
     public GameObject shipHealthModule;
@@ -27,14 +27,14 @@ public class HUDHandler : MonoBehaviour
 
     void Start()
     {
-        shipMovement = ship.GetComponent<ShipMovement>();
+        shipScript = ship.GetComponent<ShipScript>();
         shipSpeedText = shipSpeedModule.GetComponent<Text>();
     }
 
     void Update()
     {
-        shipSpeedText.text = shipMovement.velocityMag.ToString("0000") + " m/s";
-        string speedText = shipMovement.velocityMag.ToString("0000") + " ms<sup>-1</sup>";
+        shipSpeedText.text = shipScript.velocityMag.ToString("0000") + " m/s";
+        string speedText = shipScript.velocityMag.ToString("0000") + " ms<sup>-1</sup>";
         //Debug.Log();
     }
 }

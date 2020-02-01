@@ -89,8 +89,9 @@ public class ShipBuilding : MonoBehaviour
 
 
         if (snapToShip == true) {
-            draggedObject.GetComponent<PolygonCollider2D>().enabled = true;
+            draggedObject.GetComponent<Collider2D>().enabled = true;
             draggedObject.GetComponent<FixedJoint2D>().enabled = true;
+            draggedObject.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
             draggedObject.transform.parent = transform;
         }
         

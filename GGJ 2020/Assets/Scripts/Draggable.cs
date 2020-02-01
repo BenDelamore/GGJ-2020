@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour
     private GameObject hoverScriptHolder;
 
     private void Start() {
-        hoverScriptHolder = transform.parent.gameObject;
+        hoverScriptHolder = GameObject.Find("Core");
     }
 
     private void OnMouseDrag() {
