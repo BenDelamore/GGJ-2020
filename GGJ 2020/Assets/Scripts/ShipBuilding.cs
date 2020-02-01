@@ -121,6 +121,7 @@ public class ShipBuilding : MonoBehaviour
 
     void repair(GameObject target) {
         Debug.Log("repaired " + target.name);
+        Destroy(draggedObject.GetComponent<ThrusterScript>().UIelement);
         Destroy(draggedObject);
     }
 
