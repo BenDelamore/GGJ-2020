@@ -8,6 +8,8 @@ public class ShipBuilding : MonoBehaviour
     bool snapToShip;
     GameObject draggedObject;
 
+    Vector3 shipOffset = new Vector3(0, 1.28f);
+
     void Update() {
         Time.timeScale = 1;
 
@@ -32,7 +34,7 @@ public class ShipBuilding : MonoBehaviour
             draggedObject = part;
 
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
-            draggedObject.GetComponent<Collider2D>().enabled = false;
+            draggedObject.GetComponent<BoxCollider2D>().enabled = false;
             draggedObject.transform.parent = null;
         }
     }
@@ -46,6 +48,8 @@ public class ShipBuilding : MonoBehaviour
 
         draggedObject.transform.position = mousePos;
 
+
+        //check if near children
         foreach (Transform child in transform) {
             if (Within(mousePos, child.transform.position, 3.75f, 3.75f) && child.gameObject != draggedObject) {
                 snapToShip = true;
@@ -57,7 +61,8 @@ public class ShipBuilding : MonoBehaviour
             }
         }
 
-        if (snapToShip == false && Vector3.Distance(mousePos, transform.position) < 7.5) {
+        //check if near core
+        if (snapToShip == false && Within(mousePos, transform.position + shipOffset, 3.75f, 5.12f) == true) {
             snapToShip = true;
         }
 
@@ -71,7 +76,7 @@ public class ShipBuilding : MonoBehaviour
         
         bool repaired = false;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         foreach (Transform child in transform) {
             if (Within(mousePos, child.transform.position, 1.25f, 1.25f) && child.gameObject != draggedObject) {
@@ -81,15 +86,14 @@ public class ShipBuilding : MonoBehaviour
             }
         }
         if (repaired == false) {
-            if (Within(mousePos, transform.position, 3.75f, 3.75f)) {
+            if (Within(mousePos, transform.position + shipOffset, 1.5f, 3f)) {
                 repair(gameObject);
                 repaired = true;
             }
         }
 
-
+        draggedObject.GetComponent<BoxCollider2D>().enabled = true;
         if (snapToShip == true) {
-            draggedObject.GetComponent<Collider2D>().enabled = true;
             draggedObject.GetComponent<FixedJoint2D>().enabled = true;
             draggedObject.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
             draggedObject.transform.parent = transform;
@@ -101,7 +105,7 @@ public class ShipBuilding : MonoBehaviour
     void Snap() {
         draggedObject.transform.parent = transform;
 
-        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x / 2.5f) * 2.5f, Mathf.Round(draggedObject.transform.localPosition.y / 2.5f) * 2.5f);
+        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x / 2.56f) * 2.56f, Mathf.Round((draggedObject.transform.localPosition.y) / 2.56f) * 2.56f);
 
         draggedObject.transform.localPosition = gridPos;
 
