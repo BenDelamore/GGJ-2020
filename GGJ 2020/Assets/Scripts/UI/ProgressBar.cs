@@ -34,6 +34,7 @@ public class ProgressBar : MonoBehaviour
 
     void Update()
     {
+        collectedBits = GameObject.Find("Core").GetComponent<ShipScript>().warpCoreCount;
         collectedBits = Mathf.Clamp(collectedBits, 0, maxBits);
 
         for (int i = 0; i < maxBits; i++)
