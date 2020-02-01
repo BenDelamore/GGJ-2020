@@ -565,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showMessageBox: 0
   message: 
+  messageTimeLeft: 0
 --- !u!225 &1426238257
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -977,8 +978,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1815406116}
     m_Modifications:
+    - target: {fileID: 51538371, guid: e75941964e7003745b9b90f286776875, type: 3}
+      propertyPath: ship
+      value: 
+      objectReference: {fileID: 1815406110}
+    - target: {fileID: 6450702061791737390, guid: e75941964e7003745b9b90f286776875,
+        type: 3}
+      propertyPath: TrailModule.lifetime.scalar
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6450702061791737390, guid: e75941964e7003745b9b90f286776875,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6450702061791737390, guid: e75941964e7003745b9b90f286776875,
+        type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -997,17 +1017,17 @@ PrefabInstance:
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
@@ -1017,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6450702063498515017, guid: e75941964e7003745b9b90f286776875,
         type: 3}
