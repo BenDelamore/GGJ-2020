@@ -2,8 +2,6 @@
 
 public class ShipMovement : MonoBehaviour
 {
-    public GameObject core;
-
     public float velocityMag;
    
     void Start()
@@ -13,7 +11,7 @@ public class ShipMovement : MonoBehaviour
 
     void Update()
     {
-        velocityMag = core.GetComponent<Rigidbody2D>().velocity.magnitude;
+        velocityMag = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
 
         if (Input.GetKey("w"))
         {
