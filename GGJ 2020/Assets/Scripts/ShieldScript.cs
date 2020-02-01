@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldScript : MonoBehaviour
+public class ShieldScript : moduleBehaviour
 {
     public float pushForce;
-    public float health;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = 100.0f;
-    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -29,7 +22,7 @@ public class ShieldScript : MonoBehaviour
                     otherRB.AddForce(force);
                     if (health <= 0.0f)
                     {
-                        this.gameObject.SetActive(false);
+                        Destroy(gameObject);
                     }
                 }
             }
