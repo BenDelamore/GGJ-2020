@@ -43,7 +43,7 @@ public class ShipBuilding : MonoBehaviour
 
         draggedObject.transform.position = mousePos;
 
-        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x), Mathf.Round(draggedObject.transform.localPosition.y));
+        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x*1.25f)/ 1.25f, Mathf.Round(draggedObject.transform.localPosition.y * 1.25f) / 1.25f);
 
         draggedObject.transform.localPosition = gridPos;
         draggedObject.transform.rotation = gameObject.transform.rotation;
