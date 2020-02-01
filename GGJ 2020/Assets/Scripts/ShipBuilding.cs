@@ -44,8 +44,6 @@ public class ShipBuilding : MonoBehaviour
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
 
-        Vector3 corePos = gameObject.transform.position;
-
         draggedObject.transform.position = mousePos;
 
 
@@ -99,8 +97,16 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
             draggedObject.transform.parent = transform;
         }
-        
 
+
+        foreach (Collider2D collider in draggedObject.GetComponents<Collider2D>())
+        {
+            if (!collider.isTrigger)
+            {
+                collider.enabled = true;
+            }
+            break;
+        }
     }
 
     void Snap() {
