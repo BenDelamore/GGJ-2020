@@ -32,7 +32,7 @@ public class ShipBuilding : MonoBehaviour
             draggedObject = part;
 
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
-            draggedObject.GetComponent<PolygonCollider2D>().enabled = false;
+            draggedObject.GetComponent<Collider2D>().enabled = false;
             draggedObject.transform.parent = null;
         }
     }
