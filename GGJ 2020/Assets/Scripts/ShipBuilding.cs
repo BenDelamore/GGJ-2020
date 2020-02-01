@@ -4,29 +4,48 @@ using UnityEngine;
 
 public class ShipBuilding : MonoBehaviour
 {
+    bool isDragging = false;
+    Vector3 mousePos;
+    GameObject draggedObject;
 
-
-    void Update()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10);
+    void Update() {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
 
         Time.timeScale = 1;
 
         if (Input.GetKey(KeyCode.LeftShift)) {
-            Time.timeScale = 0.25f;
+            Time.timeScale = 0.1f;
         }
 
-        if (Input.GetMouseButton(0)) {
-            
-            foreach (Transform child in transform) {
-                if (Vector3.Distance(mousePos, child.transform.position) <= 2) {
-                    Debug.Log("Near " + child.name);
-                }
-            }
+        if (Input.GetMouseButtonUp(0)) {
+            isDragging = false;
         }
     }
 
-    public void HoveringOver(GameObject part) {
-        Debug.Log("Hovering Over: " + part);
+    private void FixedUpdate() {
+        if (isDragging) {
+            Dragging();
+        }
+    }
+
+    public void DragStart(GameObject part) {
+        if (isDragging == false) {
+            Debug.Log("Hovering Over: " + part);
+            isDragging = true;
+            draggedObject = part;
+        }
+    }
+
+    void Dragging() {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
+
+        Vector3 corePos = gameObject.transform.position;
+
+        draggedObject.transform.position = mousePos;
+
+        Vector3 gridPos = new Vector3(Mathf.Round(draggedObject.transform.localPosition.x), Mathf.Round(draggedObject.transform.localPosition.y));
+
+        draggedObject.transform.localPosition = gridPos;
+        draggedObject.transform.rotation = gameObject.transform.rotation;
     }
 }
