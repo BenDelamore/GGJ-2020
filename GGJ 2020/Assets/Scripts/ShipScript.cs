@@ -3,6 +3,8 @@
 public class ShipScript : MonoBehaviour
 {
     private Rigidbody2D thisRB;
+    public GameObject cam;
+    public AudioClip hitSound;
     public float health;
     public int gyroscopeCount = 0;
     public int warpCoreCount = 0;
@@ -86,6 +88,8 @@ public class ShipScript : MonoBehaviour
         if (collision.relativeVelocity.magnitude > 0.2f)
         {
             health -= 2.0f;
+            float speedRatio = Mathf.Clamp(velocityMag / 100,0.25f,1);
+            cam.GetComponent<AudioController>().PlaySoundAt(hitSound, transform, 0.5f,speedRatio,1f,true);
         }
     }
 }
