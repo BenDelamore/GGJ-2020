@@ -632,6 +632,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1618278722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5354135217347216922, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+    type: 3}
+  m_PrefabInstance: {fileID: 4218383845743343954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1618278726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618278722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcc25f25e4d8224983463d4fda3e19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1775425073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1043,11 @@ PrefabInstance:
       propertyPath: ship
       value: 
       objectReference: {fileID: 1815406110}
+    - target: {fileID: 4218383844596138558, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: shipHealthModule
+      value: 
+      objectReference: {fileID: 1618278722}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c77b4bd0a2d6a47b66218cd9e30a55, type: 3}
 --- !u!1001 &6450702063024980661
