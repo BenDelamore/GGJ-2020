@@ -20,11 +20,19 @@ public class ShieldScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name.Contains("Thruster"))
+        if (transform.parent)
         {
-            Vector2 Direction = (other.transform.position - transform.position);
-            Vector2 force = Direction.normalized * pushForce;
-            other.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            if (!other.transform.parent)
+            {
+                Rigidbody2D otherRB = other.gameObject.GetComponent<Rigidbody2D>();
+                if (otherRB)
+                {
+                    Vector2 Direction = (other.transform.position - transform.position);
+                    Vector2 force = Direction.normalized * pushForce;
+                    otherRB.AddForce(force);
+                }
+            }
         }
+        
     }
 }

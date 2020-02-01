@@ -2,7 +2,6 @@
 
 public class ShipScript : MonoBehaviour
 {
-    public GameObject core;
     private Rigidbody2D thisRB;
     public float health;
 
@@ -11,7 +10,7 @@ public class ShipScript : MonoBehaviour
     void Start()
     {
         health = 100.0f;
-        thisRB = core.GetComponent<Rigidbody2D>();
+        thisRB = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -20,11 +19,11 @@ public class ShipScript : MonoBehaviour
 
         if (Input.GetKey("q"))
         {
-            thisRB.AddTorque(10.0f);
+            thisRB.AddTorque(1000.0f);
         }
         if (Input.GetKey("e"))
         {
-            thisRB.AddTorque(-10.0f);
+            thisRB.AddTorque(-1000.0f);
         }
         if (Input.GetKey("w"))
         {

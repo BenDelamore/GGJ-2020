@@ -8,10 +8,10 @@ public class Draggable : MonoBehaviour
     private GameObject hoverScriptHolder;
 
     private void Start() {
-        hoverScriptHolder = transform.parent.gameObject;
+        //hoverScriptHolder = transform.parent.gameObject;
     }
 
     private void OnMouseDrag() {
-        hoverScriptHolder.GetComponent<ShipBuilding>().DragStart(gameObject);
+        //hoverScriptHolder.GetComponent<ShipBuilding>().DragStart(gameObject);
     }
 }
