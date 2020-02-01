@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 5872201429249681961}
   - component: {fileID: 5872201429249681965}
   - component: {fileID: 5872201429249681966}
-  - component: {fileID: 5872201429249681960}
   - component: {fileID: 5872201429249681956}
   - component: {fileID: 5872201429249681957}
   - component: {fileID: 5872201429249681959}
   - component: {fileID: 7155269454623528268}
+  - component: {fileID: 3973123875926993463}
+  - component: {fileID: -8141774399927074143}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -108,24 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!255 &5872201429249681960
-FixedJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872201429249681962}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.000008622719, y: 0.000000010418006}
-  m_ConnectedAnchor: {x: 0.0000064670394, y: 0.0000000078135045}
-  m_DampingRatio: 0
-  m_Frequency: 0
 --- !u!58 &5872201429249681956
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,3 +190,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3208435, y: 2.3048992}
   m_EdgeRadius: 0
+--- !u!114 &3973123875926993463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872201429249681962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b834be3fc8b64646ad2cd0713bf4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!255 &-8141774399927074143
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872201429249681962}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0
