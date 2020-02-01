@@ -8,7 +8,7 @@ public class ShipBuilding : MonoBehaviour
     bool snapToShip;
     GameObject draggedObject;
 
-    Vector3 shipOffset = new Vector3(0, 1.28f);
+    float shipOffset = 1.28f;
 
     void Update() {
         Time.timeScale = 1;
@@ -62,7 +62,7 @@ public class ShipBuilding : MonoBehaviour
         }
 
         //check if near core
-        if (snapToShip == false && Within(mousePos, transform.position + shipOffset, 3.75f, 5.12f) == true) {
+        if (snapToShip == false && Within(mousePos, transform.position + transform.up * shipOffset, 3.75f, 5.12f) == true) {
             snapToShip = true;
         }
 
@@ -86,14 +86,15 @@ public class ShipBuilding : MonoBehaviour
             }
         }
         if (repaired == false) {
-            if (Within(mousePos, transform.position + shipOffset, 1.5f, 3f)) {
+            if (Within(mousePos, transform.position + transform.up * shipOffset, 1.5f, 3f)) {
                 repair(gameObject);
                 repaired = true;
             }
         }
 
-        draggedObject.GetComponent<BoxCollider2D>().enabled = true;
+        
         if (snapToShip == true) {
+            draggedObject.GetComponent<BoxCollider2D>().enabled = true;
             draggedObject.GetComponent<FixedJoint2D>().enabled = true;
             draggedObject.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
             draggedObject.transform.parent = transform;
