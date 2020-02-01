@@ -11,6 +11,7 @@ public class ModHealthUI : MonoBehaviour
     private bool healthVisible = false;
     private Image healthRing;
     private CanvasGroup canvas;
+    public GameObject Module;
 
     void Start()
     {
@@ -22,6 +23,10 @@ public class ModHealthUI : MonoBehaviour
 
     void Update()
     {
+        if (Module.GetComponent<ThrusterScript>())
+        {
+            healthValue = Module.GetComponent<ThrusterScript>().health;
+        }
         healthRing.fillAmount = healthValue / 100f;
 
         if (showHealth && !healthVisible)
