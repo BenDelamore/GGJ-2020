@@ -5,17 +5,12 @@ using UnityEngine;
 public class ShieldScript : MonoBehaviour
 {
     public float pushForce;
+    public float health;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        health = 100.0f;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -29,7 +24,13 @@ public class ShieldScript : MonoBehaviour
                 {
                     Vector2 Direction = (other.transform.position - transform.position);
                     Vector2 force = Direction.normalized * pushForce;
+
+                    health -= force.magnitude * 0.005f;
                     otherRB.AddForce(force);
+                    if (health <= 0.0f)
+                    {
+                        this.gameObject.SetActive(false);
+                    }
                 }
             }
         }
