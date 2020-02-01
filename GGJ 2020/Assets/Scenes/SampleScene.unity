@@ -552,6 +552,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: -3.75
       objectReference: {fileID: 0}
+    - target: {fileID: 3531999020863503399, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552816581184524842, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6552816581184524843, guid: 6b354ddd010acc24283225917983fea0,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
