@@ -105,10 +105,12 @@ public class TutorialManager : MonoBehaviour
         }
 
 
+        /*
         if (Input.GetKeyDown(KeyCode.T))
         {
             EndModTutorial();
         }
+        */
     }
 
     public void StartNameTutorial()
