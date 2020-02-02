@@ -236,6 +236,7 @@ MonoBehaviour:
   health: 0
   UIelement: {fileID: 2652902072358338409}
   rootNode: {fileID: 0}
+  popOff: {fileID: 8300000, guid: be44526df664fa74ea415a3e52b5dcf0, type: 3}
   thrustForce: 100000
   control: w
   thrusterSound: {fileID: 8300000, guid: c4e4896e0a46d3045badc39763e9d49e, type: 3}

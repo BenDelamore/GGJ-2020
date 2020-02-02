@@ -5,14 +5,18 @@ using UnityEngine;
 public class ShipBuilding : MonoBehaviour
 {
     public bool isDragging = false;
+    public GameObject cam;
+    public AudioClip connectSound;
+    public AudioClip popOff;
     bool snapToShip;
     GameObject draggedObject;
     float rotation;
     GameObject closestNode;
+    List<GameObject> attachedModules;
 
     float shipOffset = 1.28f;
 
-    void Update() {
+    void LateUpdate() {
         Time.timeScale = 1;
 
         if (Input.GetMouseButtonUp(0) && isDragging)
@@ -27,17 +31,30 @@ public class ShipBuilding : MonoBehaviour
         }
     }
 
-    private void LateUpdate() {
+    private void Start()
+    {
+        attachedModules = new List<GameObject>();
     }
 
     public void DragStart(GameObject part) {
         if (isDragging == false) {
+
             isDragging = true;
             draggedObject = part;
+
+            if (draggedObject.transform.parent != null) {
+                Debug.Log("pop!");
+                Debug.Log(draggedObject.transform.parent);
+                Camera.main.GetComponent<AudioController>().PlaySoundAt(popOff, draggedObject.transform, 0.5f, 1, 1, true);
+            }
 
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
             draggedObject.GetComponent<BoxCollider2D>().enabled = false;
             draggedObject.transform.parent = null;
+            if (attachedModules.Contains(draggedObject))
+            {
+                attachedModules.Remove(draggedObject);
+            }
 
             if (draggedObject.GetComponent<GyroscopeScript>())
             {
@@ -51,6 +68,13 @@ public class ShipBuilding : MonoBehaviour
                 if (draggedObject.GetComponent<WarpCoreScript>().rootNode)
                 {
                     GetComponent<ShipScript>().warpCoreCount--;
+                }
+            }
+            if (draggedObject.GetComponent<ShieldScript>())
+            {
+                if (draggedObject.GetComponent<ShieldScript>().rootNode)
+                {
+                    draggedObject.transform.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 }
             }
             // tells the dragged object to Disconnect itself from the node
@@ -106,14 +130,41 @@ public class ShipBuilding : MonoBehaviour
 
 
         GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
+        List<GameObject> closeSnapNodes = new List<GameObject>();
+        foreach (GameObject node in snapNodes)
+        {
+            float distance = (draggedObject.transform.position - node.transform.position).magnitude;
+            if (distance <= 3.75f)
+            {
+                closeSnapNodes.Add(node);
+            }
+        }
+
         closestNode = null;
         float closestDistance = Mathf.Infinity;
-        foreach (GameObject node in snapNodes)
+        foreach (GameObject node in closeSnapNodes)
         {
             float distance = (draggedObject.transform.position - node.transform.position).magnitude;
             if ((closestNode == null || distance < closestDistance) && !node.GetComponent<nodeScript>().boundObject)
             {
-                if (draggedObject.GetComponent<moduleBehaviour>().CanConnect(node, rotation))
+                bool isColliding = false;
+                foreach (GameObject module in attachedModules)
+                {
+                    foreach (Collider2D collider in module.GetComponents<Collider2D>())
+                    {
+                        if (!collider.isTrigger)
+                        {
+                            if (collider.bounds.Contains(node.transform.position))
+                            {
+                                isColliding = true;
+                                break;
+                            }
+                        }
+                        if (isColliding) { break; }
+                    }
+                    if (isColliding) { break; }
+                }
+                if (!isColliding && draggedObject.GetComponent<moduleBehaviour>().CanConnect(node, rotation))
                 {
                     closestNode = node;
                     closestDistance = distance;
@@ -121,13 +172,16 @@ public class ShipBuilding : MonoBehaviour
             }
         }
 
-        if (closestDistance <= 3.75f)
+        if (closestNode != null)
         {
             snapToShip = true;
         }
 
         if (snapToShip) {
             Snap();
+        }
+        else {
+            draggedObject.transform.parent = null;
         }
     }
 
@@ -155,6 +209,9 @@ public class ShipBuilding : MonoBehaviour
         */
         
         if (snapToShip) {
+            //Play Connection Sound
+            cam.GetComponent<AudioController>().PlaySoundAt(connectSound, transform, 0.5f,1,1,true);
+            
             // get the closest node to the mouse position and set the object to it's position
 
             /*
@@ -188,6 +245,13 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<moduleBehaviour>().Connect(closestNode, rotation);
 
             draggedObject.GetComponent<BoxCollider2D>().enabled = true;
+
+            attachedModules.Add(draggedObject);
+
+            if (draggedObject.GetComponent<ShieldScript>())
+            {
+                draggedObject.transform.GetComponentInChildren<ParticleSystem>().Play();
+            }
 
             if (draggedObject.GetComponent<GyroscopeScript>())
             {

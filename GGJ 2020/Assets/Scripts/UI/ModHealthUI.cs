@@ -28,7 +28,7 @@ public class ModHealthUI : MonoBehaviour
         {
             healthValue = Module.GetComponent<moduleBehaviour>().health;
         }
-        healthRing.fillAmount = healthValue / 100f;
+        healthRing.fillAmount = healthValue * 0.01f;
 
         if (showHealth && !healthVisible)
         {
@@ -46,6 +46,8 @@ public class ModHealthUI : MonoBehaviour
 
     void Show()
     {
+        canvas.DOKill(true);
+        transform.DOKill(true);
         canvas.DOFade(1f, 0.3f);
         transform.DOScale(0.75f, 0.3f).SetEase(Ease.OutBack);
 
@@ -55,6 +57,7 @@ public class ModHealthUI : MonoBehaviour
     void Hide()
     {
         canvas.DOKill(true);
+        transform.DOKill(true);
         canvas.DOFade(0f, 0.3f);
         transform.DOScale(0f, 0.5f).SetEase(Ease.InQuad);
 
