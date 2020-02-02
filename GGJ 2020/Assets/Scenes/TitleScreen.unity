@@ -684,9 +684,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 471657020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a082cba1a14bfc4b916ef3f4aaf74ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 316b160631b5f184bbd3a9af373220bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTutState: 0
 --- !u!4 &471657022
 Transform:
   m_ObjectHideFlags: 0
@@ -1412,6 +1413,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 471657021}
+        m_MethodName: StartNameTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.92, g: 0.88471466, b: 0.8464, a: 0.2509804}
@@ -1474,7 +1486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1426238253
 RectTransform:
   m_ObjectHideFlags: 0
