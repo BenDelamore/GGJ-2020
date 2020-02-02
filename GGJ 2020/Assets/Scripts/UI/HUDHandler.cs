@@ -50,7 +50,7 @@ public class HUDHandler : MonoBehaviour
         shipHealthText.text = shipScript.health.ToString("0") + "%";
         string speedText = shipScript.velocityMag.ToString("0000") + " ms<sup>-1</sup>";
 
-        Debug.Log(GlobalData.seed);
+        //Debug.Log(GlobalData.seed);
 
 
     }

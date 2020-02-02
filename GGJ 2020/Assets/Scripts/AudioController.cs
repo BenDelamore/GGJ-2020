@@ -63,7 +63,7 @@ public class AudioController : MonoBehaviour
     private float[] defaultRange;
 
     void Start() {
-
+        currentFades = new List<FadeData>();
     }
 
     public void PlaySoundAt(AudioClip clip, Transform trans, float volume, float minRange = 1f, float maxRange = 1f, bool hasMultiple = false) {

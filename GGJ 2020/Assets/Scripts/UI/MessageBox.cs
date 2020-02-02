@@ -70,21 +70,21 @@ public class MessageBox : MonoBehaviour
     }
 
     // Messagebox Animations and Transitions
-    void Begin()
+    private void Begin()
     {
         ShowBox();
         ShowMessage();
         Debug.Log("Showing Messagebox");
     }
 
-    void End()
+    private void End()
     {
         HideBox();
         HideMessage();
         Debug.Log("Hiding Messagebox");
     }
 
-    void ShowBox()
+    private void ShowBox()
     {
         rTransform.DOKill(true);
         canvas.DOKill(true);
@@ -92,12 +92,12 @@ public class MessageBox : MonoBehaviour
         rTransform.DOSizeDelta(new Vector2(670f, 128f), 0.5f).SetEase(Ease.OutQuint);
     }
 
-    void ShowMessage()
+    private void ShowMessage()
     {
 
     }
 
-    void HideBox()
+    private void HideBox()
     {
         rTransform.DOKill(true);
         canvas.DOKill(true);
@@ -105,7 +105,7 @@ public class MessageBox : MonoBehaviour
         rTransform.DOSizeDelta(new Vector2(150f, 128f), 0.4f).SetEase(Ease.OutQuad);
     }
 
-    void HideMessage()
+    private void HideMessage()
     {
 
     }

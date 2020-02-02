@@ -11,6 +11,12 @@ public class ThrusterScript : moduleBehaviour
 
     private void Update()
     {
+        Vector3 worldToScreen = Camera.main.WorldToScreenPoint(transform.position);
+        GameObject canvas = GameObject.Find("Canvas");
+        worldToScreen.x -= canvas.GetComponent<Canvas>().pixelRect.width * 0.5f;
+        worldToScreen.y -= canvas.GetComponent<Canvas>().pixelRect.height * 0.5f;
+        UIelement.transform.localPosition = worldToScreen;
+
         if (rootNode)
         {
             if (Input.GetKey(control))

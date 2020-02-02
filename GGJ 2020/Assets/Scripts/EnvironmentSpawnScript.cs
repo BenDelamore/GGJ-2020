@@ -36,35 +36,35 @@ public class EnvironmentSpawnScript : MonoBehaviour
             if (i % 5 == 0)
             {
                 // Thruster
-                Debug.Log("Spawning Thruster with id #" + i);
+                //Debug.Log("Spawning Thruster with id #" + i);
                 GameObject newThruster = GameObject.Instantiate(Thruster);
                 newThruster.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 7 == 0)
             {
                 // Shield
-                Debug.Log("Spawning Shield with id #" + i);
+                //Debug.Log("Spawning Shield with id #" + i);
                 GameObject newShield = GameObject.Instantiate(Shield);
                 newShield.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 9 == 0)
             {
                 // Gyroscope
-                Debug.Log("Spawning Gyroscope with id #" + i);
+                //Debug.Log("Spawning Gyroscope with id #" + i);
                 GameObject newGyroscope = GameObject.Instantiate(Gyroscope);
                 newGyroscope.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 11 == 0)
             {
                 // Warp Core
-                Debug.Log("Spawning Warp Core with id #" + i);
+                //Debug.Log("Spawning Warp Core with id #" + i);
                 GameObject newWarpCore = GameObject.Instantiate(WarpCore);
                 newWarpCore.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else
             {
                 // Scrap
-                Debug.Log("Spawning Scrap with id #" + i);
+                //Debug.Log("Spawning Scrap with id #" + i);
                 GameObject newScrap = GameObject.Instantiate(Scrap);
                 newScrap.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }

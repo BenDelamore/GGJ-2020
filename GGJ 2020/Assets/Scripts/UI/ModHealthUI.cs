@@ -51,7 +51,7 @@ public class ModHealthUI : MonoBehaviour
         canvas.DOFade(1f, 0.3f);
         transform.DOScale(0.75f, 0.3f).SetEase(Ease.OutBack);
 
-        Debug.Log("Showing Module Health");
+        //Debug.Log("Showing Module Health");
     }
 
     void Hide()
@@ -61,6 +61,6 @@ public class ModHealthUI : MonoBehaviour
         canvas.DOFade(0f, 0.3f);
         transform.DOScale(0f, 0.5f).SetEase(Ease.InQuad);
 
-        Debug.Log("Hiding Module Health");
+        //Debug.Log("Hiding Module Health");
     }
 }

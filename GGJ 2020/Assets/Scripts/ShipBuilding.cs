@@ -12,7 +12,7 @@ public class ShipBuilding : MonoBehaviour
     GameObject draggedObject;
     float rotation;
     GameObject closestNode;
-    List<GameObject> attachedModules;
+    public List<GameObject> attachedModules;
 
     float shipOffset = 1.28f;
 
