@@ -214,6 +214,7 @@ MonoBehaviour:
   health: 0
   UIelement: {fileID: 7604305146418289649}
   rootNode: {fileID: 0}
+  popOff: {fileID: 8300000, guid: be44526df664fa74ea415a3e52b5dcf0, type: 3}
   pushForce: 4
 --- !u!114 &3973123875926993463
 MonoBehaviour:

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShipBuilding : MonoBehaviour
 {
     public bool isDragging = false;
+    public GameObject cam;
+    public AudioClip connectSound;
+    public AudioClip popOff;
     bool snapToShip;
     GameObject draggedObject;
     float rotation;
@@ -13,7 +16,7 @@ public class ShipBuilding : MonoBehaviour
 
     float shipOffset = 1.28f;
 
-    void Update() {
+    void LateUpdate() {
         Time.timeScale = 1;
 
         if (Input.GetMouseButtonUp(0) && isDragging)
@@ -35,8 +38,15 @@ public class ShipBuilding : MonoBehaviour
 
     public void DragStart(GameObject part) {
         if (isDragging == false) {
+
             isDragging = true;
             draggedObject = part;
+
+            if (draggedObject.transform.parent != null) {
+                Debug.Log("pop!");
+                Debug.Log(draggedObject.transform.parent);
+                Camera.main.GetComponent<AudioController>().PlaySoundAt(popOff, draggedObject.transform, 0.5f, 1, 1, true);
+            }
 
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
             draggedObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -170,6 +180,9 @@ public class ShipBuilding : MonoBehaviour
         if (snapToShip) {
             Snap();
         }
+        else {
+            draggedObject.transform.parent = null;
+        }
     }
 
     void DragStop() {
@@ -196,6 +209,9 @@ public class ShipBuilding : MonoBehaviour
         */
         
         if (snapToShip) {
+            //Play Connection Sound
+            cam.GetComponent<AudioController>().PlaySoundAt(connectSound, transform, 0.5f,1,1,true);
+            
             // get the closest node to the mouse position and set the object to it's position
 
             /*

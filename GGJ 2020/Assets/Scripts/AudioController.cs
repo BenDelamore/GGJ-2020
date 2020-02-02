@@ -63,8 +63,7 @@ public class AudioController : MonoBehaviour
     private float[] defaultRange;
 
     void Start() {
-        defaultRange[0] = 1;
-        defaultRange[1] = 1;
+
     }
 
     public void PlaySoundAt(AudioClip clip, Transform trans, float volume, float minRange = 1f, float maxRange = 1f, bool hasMultiple = false) {
@@ -85,12 +84,14 @@ public class AudioController : MonoBehaviour
             GameObject newSound = Instantiate(audioSource,trans);
             newSound.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
-            Destroy(newSound, clip.length);
-
             newSound.GetComponent<AudioSource>().clip = clip;
             newSound.GetComponent<AudioSource>().volume = volume;
             newSound.GetComponent<AudioSource>().pitch = Random.Range(minRange, maxRange);
             newSound.GetComponent<AudioSource>().Play();
+
+
+
+            Destroy(newSound, clip.length);
         }
     }
 

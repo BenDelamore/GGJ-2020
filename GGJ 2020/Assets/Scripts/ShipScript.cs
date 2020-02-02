@@ -88,8 +88,9 @@ public class ShipScript : MonoBehaviour
         if (collision.relativeVelocity.magnitude > 0.2f)
         {
             health -= 2.0f;
-            float speedRatio = Mathf.Clamp(velocityMag / 100,0.25f,1);
-            cam.GetComponent<AudioController>().PlaySoundAt(hitSound, transform, 0.5f,speedRatio,1f,true);
+            float speedRatioMin = Mathf.Clamp(velocityMag / 100,0.25f,1);
+            float speedRatioMax = Mathf.Clamp(speedRatioMin + 0.1f, speedRatioMin, 1);
+            cam.GetComponent<AudioController>().PlaySoundAt(hitSound, transform, 0.5f, speedRatioMin, 1f,true);
         }
     }
 }
