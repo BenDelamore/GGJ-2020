@@ -22,6 +22,7 @@ public class ShipScript : MonoBehaviour
         if (health <= 0.0f)
         {
             // game over
+            FindObjectOfType<SceneSwitcher>().SceneSwitch("TitleScreen");
         }
 
 

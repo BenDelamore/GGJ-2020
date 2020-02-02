@@ -99,6 +99,16 @@ public class moduleBehaviour : MonoBehaviour
                 break;
             }
         }
+        
+        /*
+        foreach (Transform child in transform)
+        {
+            if (child.tag != "SnapNode")
+            {
+                child.transform.parent = null;
+            }
+        }
+        */
     }
 
 
