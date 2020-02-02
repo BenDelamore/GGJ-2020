@@ -437,6 +437,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &800361575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9162199932413674865, guid: ea3a95ab2eb4adb458a86f765cf5d7d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 9162199932509469965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &887252911
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +911,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
+    - target: {fileID: 7667567139288335394, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: popOff
+      value: 
+      objectReference: {fileID: 8300000, guid: be44526df664fa74ea415a3e52b5dcf0, type: 3}
+    - target: {fileID: 7667567139288335394, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: connectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e316ac94c8b4d94a9250614fc02afa8, type: 3}
+    - target: {fileID: 7667567139288335394, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 800361575}
+    - target: {fileID: 7667567139288335395, guid: 6b354ddd010acc24283225917983fea0,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d1513fe1e897340429522303fba93786, type: 3}
     - target: {fileID: 7667567139288335420, guid: 6b354ddd010acc24283225917983fea0,
         type: 3}
       propertyPath: m_AngularDrag
