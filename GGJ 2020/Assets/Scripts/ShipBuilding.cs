@@ -26,7 +26,7 @@ public class ShipBuilding : MonoBehaviour
 
         if (isDragging)
         {
-            Time.timeScale = 0.1f;
+            Time.timeScale = 0.25f;
             Dragging();
         }
     }
