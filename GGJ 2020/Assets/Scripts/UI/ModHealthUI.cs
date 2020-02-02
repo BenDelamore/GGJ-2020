@@ -28,7 +28,7 @@ public class ModHealthUI : MonoBehaviour
         {
             healthValue = Module.GetComponent<moduleBehaviour>().health;
         }
-        healthRing.fillAmount = healthValue / 100f;
+        healthRing.fillAmount = healthValue * 0.01f;
 
         if (showHealth && !healthVisible)
         {

@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6857552630662590191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.703786, z: -505.46844}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5866704539211529642}
@@ -333,6 +333,7 @@ MonoBehaviour:
   health: 0
   UIelement: {fileID: 6128366696037493280}
   rootNode: {fileID: 0}
+  popOff: {fileID: 8300000, guid: be44526df664fa74ea415a3e52b5dcf0, type: 3}
 --- !u!255 &7199128417485102540
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -363,6 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b834be3fc8b64646ad2cd0713bf4362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isConnectedToCore: 0
+  isTouchingCore: 0
 --- !u!1001 &3148455897998788009
 PrefabInstance:
   m_ObjectHideFlags: 0
