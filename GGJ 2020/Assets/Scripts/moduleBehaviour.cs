@@ -7,6 +7,7 @@ public class moduleBehaviour : MonoBehaviour
     public float health;
     public GameObject UIelement;
     public GameObject rootNode;
+    public AudioClip popOff;
 
     public GameObject CanConnect(GameObject _node, float rotation)
     {
