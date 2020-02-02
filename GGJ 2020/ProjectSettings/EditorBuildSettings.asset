@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Keane-Scene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: ae5f3bac268e43044b2a0a04dc91ecb1
+  - enabled: 1
+    path: Assets/Scenes/Keane-Scene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Sam-SampleScene.unity
     guid: 7b942bf258d4aad499e59ba213946e60

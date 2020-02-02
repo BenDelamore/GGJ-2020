@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 using DG.Tweening;
 
 public class SceneSwitcher : MonoBehaviour
@@ -24,20 +23,21 @@ public class SceneSwitcher : MonoBehaviour
     void Awake()
     {
         curScene = SceneManager.GetActiveScene().name;
+        GlobalData.curScene = curScene;
         Debug.Log("Current scene: " + curScene);
 
     }
 
     void Start()
     {
-        if (curScene == "MainMenu")
+        if (curScene == "TitleScreen")
         {
             //GlobalData.LastScene = curScene;
         }
 
         if (fadePanel == null)
         {
-            fadePanel = GameObject.Find("FadePanel");
+            fadePanel = GameObject.Find("Panel");
         }
         fadePanel.SetActive(true);
         fadeImage = fadePanel.GetComponent<Image>();
@@ -97,6 +97,21 @@ public class SceneSwitcher : MonoBehaviour
         targetScene = scene;
     }
 
+    public void SetSeed()
+    {
+        var input = GameObject.Find("InputField").GetComponent<InputField>();
+
+        if (input.text != "")
+        {
+            GlobalData.seed = input.text;
+        }
+        else
+        {
+            GlobalData.seed = "Samus Aran";
+        }
+
+        Debug.Log("Seed set to " + GlobalData.seed);
+    }
 
     public void StartFade()
     {
