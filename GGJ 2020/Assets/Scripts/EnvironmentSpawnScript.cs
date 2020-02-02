@@ -21,14 +21,14 @@ public class EnvironmentSpawnScript : MonoBehaviour
     {
         // generates seed
         seed = 1.0f;
-        string charactersLeft = playerName;
+        string charactersLeft = GlobalData.seed;
         while (charactersLeft.Length >= 1)
         {
             int charInt = charactersLeft[0];
             seed *= charInt;
             charactersLeft = charactersLeft.Remove(0, 1);
         }
-        iSeed = Mathf.RoundToInt(seed);
+        iSeed = Mathf.RoundToInt(seed % 100000);
         Random.InitState(iSeed);
         float totalItemsToSpawn = spawnSize * spawnSize * density;
         for (int i = 0; i < Mathf.CeilToInt(totalItemsToSpawn); i++)
