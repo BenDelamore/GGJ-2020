@@ -52,6 +52,7 @@ public class MessageBox : MonoBehaviour
             showMessageBox = false;
         }
 
+        /*
         tempCountdown -= Time.deltaTime;
 
         if (tempCountdown <=0 && !tempShow)
@@ -59,6 +60,7 @@ public class MessageBox : MonoBehaviour
             SendMessage("If you are seeing this message then this is working as expected", 5f);
             tempShow = true;
         }
+        */
     }
 
     public void SendMessage(string text, float duration)
