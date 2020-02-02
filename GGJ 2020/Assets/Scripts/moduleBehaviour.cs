@@ -53,7 +53,14 @@ public class moduleBehaviour : MonoBehaviour
 
     public void Connect(GameObject _node, float rotation)
     {
-        CanConnect(_node, rotation).GetComponent<nodeScript>().boundObject = _node.GetComponent<nodeScript>().rootObject;
+        // THE NODE OF THIS MODULE THAT WILL OVERLAP THE ROOT OBJECT OF _node
+        GameObject overlapNode = CanConnect(_node, rotation);
+        overlapNode.GetComponent<nodeScript>().boundObject = _node.GetComponent<nodeScript>().rootObject;
+        if (overlapNode.GetComponent<nodeScript>().boundObject != GameObject.Find("Core"))
+        {
+            overlapNode.GetComponent<nodeScript>().boundObject.GetComponent<moduleBehaviour>().rootNode = overlapNode;
+
+        }
         _node.GetComponent<nodeScript>().boundObject = gameObject;
         rootNode = _node;
     }

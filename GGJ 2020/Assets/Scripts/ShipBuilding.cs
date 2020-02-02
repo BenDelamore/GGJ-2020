@@ -33,7 +33,7 @@ public class ShipBuilding : MonoBehaviour
 
     private void Start()
     {
-        attachedModules = new List<GameObject>();
+        //attachedModules = new List<GameObject>();
     }
 
     public void DragStart(GameObject part) {
@@ -46,6 +46,21 @@ public class ShipBuilding : MonoBehaviour
                 Debug.Log("pop!");
                 Debug.Log(draggedObject.transform.parent);
                 Camera.main.GetComponent<AudioController>().PlaySoundAt(popOff, draggedObject.transform, 0.5f, 1, 1, true);
+            }
+
+            for (int i = 0; i < draggedObject.transform.childCount; i++)
+            {
+                GameObject child = draggedObject.transform.GetChild(i).gameObject;
+                if (child.tag == "SnapNode")
+                {
+                    if (child.GetComponent<nodeScript>().boundObject)
+                    {
+                        if (child.GetComponent<nodeScript>().boundObject != gameObject)
+                        {
+                            child.GetComponent<nodeScript>().boundObject.GetComponent<moduleBehaviour>().Disconnect();
+                        }
+                    }
+                }
             }
 
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
@@ -134,7 +149,7 @@ public class ShipBuilding : MonoBehaviour
         foreach (GameObject node in snapNodes)
         {
             float distance = (draggedObject.transform.position - node.transform.position).magnitude;
-            if (distance <= 3.75f)
+            if (distance <= 1.28f)
             {
                 closeSnapNodes.Add(node);
             }
@@ -248,6 +263,8 @@ public class ShipBuilding : MonoBehaviour
 
             attachedModules.Add(draggedObject);
 
+            FindObjectOfType<TutorialManager>().EndModTutorial();
+
             if (draggedObject.GetComponent<ShieldScript>())
             {
                 draggedObject.transform.GetComponentInChildren<ParticleSystem>().Play();
@@ -276,6 +293,19 @@ public class ShipBuilding : MonoBehaviour
                     draggedObject.GetComponent<ThrusterScript>().control = "d";
                 }
             }
+        }
+        else
+        {
+            /*
+            foreach (Collider2D collider in attachedModules)
+            {
+                if (!collider.isTrigger)
+                {
+                    collider.enabled = true;
+                    break;
+                }
+            }
+            */
         }
 
 
