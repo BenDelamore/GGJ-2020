@@ -7,8 +7,8 @@ public class EnvironmentSpawnScript : MonoBehaviour
     public string playerName;
     private float seed;
     private int iSeed = 0;
-    private float density = 0.025f; // one item per 8 square units
-    private float spawnSize = 100.0f;
+    private float density = 0.001f; // one item per 8 square units
+    private float spawnSize = 500.0f;
 
     public GameObject Scrap;
     public GameObject Thruster;

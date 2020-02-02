@@ -21,6 +21,7 @@ public class ThrusterScript : moduleBehaviour
                 foreach(Transform child in transform) {
                     if (child.name.Contains("Audio")) {
                         child.GetComponent<AudioSource>().Stop();
+                        Camera.main.GetComponent<AudioController>().FadeAudio(child.GetComponent<AudioSource>(), 0.0f, 0.5f);
                     }
                 }
             }

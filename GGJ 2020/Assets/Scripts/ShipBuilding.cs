@@ -9,6 +9,7 @@ public class ShipBuilding : MonoBehaviour
     GameObject draggedObject;
     float rotation;
     GameObject closestNode;
+    List<GameObject> attachedModules;
 
     float shipOffset = 1.28f;
 
@@ -27,7 +28,9 @@ public class ShipBuilding : MonoBehaviour
         }
     }
 
-    private void LateUpdate() {
+    private void Start()
+    {
+        attachedModules = new List<GameObject>();
     }
 
     public void DragStart(GameObject part) {
@@ -38,6 +41,10 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<FixedJoint2D>().enabled = false;
             draggedObject.GetComponent<BoxCollider2D>().enabled = false;
             draggedObject.transform.parent = null;
+            if (attachedModules.Contains(draggedObject))
+            {
+                attachedModules.Remove(draggedObject);
+            }
 
             if (draggedObject.GetComponent<GyroscopeScript>())
             {
@@ -51,6 +58,13 @@ public class ShipBuilding : MonoBehaviour
                 if (draggedObject.GetComponent<WarpCoreScript>().rootNode)
                 {
                     GetComponent<ShipScript>().warpCoreCount--;
+                }
+            }
+            if (draggedObject.GetComponent<ShieldScript>())
+            {
+                if (draggedObject.GetComponent<ShieldScript>().rootNode)
+                {
+                    draggedObject.transform.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 }
             }
             // tells the dragged object to Disconnect itself from the node
@@ -106,14 +120,41 @@ public class ShipBuilding : MonoBehaviour
 
 
         GameObject[] snapNodes = GameObject.FindGameObjectsWithTag("SnapNode");
+        List<GameObject> closeSnapNodes = new List<GameObject>();
+        foreach (GameObject node in snapNodes)
+        {
+            float distance = (draggedObject.transform.position - node.transform.position).magnitude;
+            if (distance <= 3.75f)
+            {
+                closeSnapNodes.Add(node);
+            }
+        }
+
         closestNode = null;
         float closestDistance = Mathf.Infinity;
-        foreach (GameObject node in snapNodes)
+        foreach (GameObject node in closeSnapNodes)
         {
             float distance = (draggedObject.transform.position - node.transform.position).magnitude;
             if ((closestNode == null || distance < closestDistance) && !node.GetComponent<nodeScript>().boundObject)
             {
-                if (draggedObject.GetComponent<moduleBehaviour>().CanConnect(node, rotation))
+                bool isColliding = false;
+                foreach (GameObject module in attachedModules)
+                {
+                    foreach (Collider2D collider in module.GetComponents<Collider2D>())
+                    {
+                        if (!collider.isTrigger)
+                        {
+                            if (collider.bounds.Contains(node.transform.position))
+                            {
+                                isColliding = true;
+                                break;
+                            }
+                        }
+                        if (isColliding) { break; }
+                    }
+                    if (isColliding) { break; }
+                }
+                if (!isColliding && draggedObject.GetComponent<moduleBehaviour>().CanConnect(node, rotation))
                 {
                     closestNode = node;
                     closestDistance = distance;
@@ -121,7 +162,7 @@ public class ShipBuilding : MonoBehaviour
             }
         }
 
-        if (closestDistance <= 3.75f)
+        if (closestNode != null)
         {
             snapToShip = true;
         }
@@ -188,6 +229,13 @@ public class ShipBuilding : MonoBehaviour
             draggedObject.GetComponent<moduleBehaviour>().Connect(closestNode, rotation);
 
             draggedObject.GetComponent<BoxCollider2D>().enabled = true;
+
+            attachedModules.Add(draggedObject);
+
+            if (draggedObject.GetComponent<ShieldScript>())
+            {
+                draggedObject.transform.GetComponentInChildren<ParticleSystem>().Play();
+            }
 
             if (draggedObject.GetComponent<GyroscopeScript>())
             {
