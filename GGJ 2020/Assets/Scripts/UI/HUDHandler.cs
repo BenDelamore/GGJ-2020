@@ -34,7 +34,7 @@ public class HUDHandler : MonoBehaviour
 
     void Update()
     {
-        shipSpeedText.text = shipScript.velocityMag.ToString("0000") + " m/s";
+        shipSpeedText.text = shipScript.velocityMag.ToString("000") + " m/s";
         if (shipScript.health < 20.0f)
         {
             Color newColour = Color.white;
@@ -45,10 +45,14 @@ public class HUDHandler : MonoBehaviour
         }
         else
         {
-            shipHealthText.color = Color.white;
+            Color newColour = Color.white;
+            newColour.r = 0.920f;
+            newColour.g = 0.884f;
+            newColour.b = 0.846f;
+            shipHealthText.color = newColour;
         }
-        shipHealthText.text = shipScript.health.ToString("0") + "%";
-        string speedText = shipScript.velocityMag.ToString("0000") + " ms<sup>-1</sup>";
+        shipHealthText.text = shipScript.health.ToString("00") + "%";
+        string speedText = shipScript.velocityMag.ToString("000") + " ms<sup>-1</sup>";
 
         //Debug.Log(GlobalData.seed);
 

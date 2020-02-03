@@ -82,11 +82,11 @@ public class SceneSwitcher : MonoBehaviour
         {
             if (curScene == "TitleScreen")
             {
-                //QuitGame();
+                QuitGame();
             }
             else
             {
-                //SceneSwitch("TitleScreen");
+                SceneSwitch("TitleScreen");
             }
         }
 

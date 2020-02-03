@@ -42,7 +42,7 @@ public class MessageBox : MonoBehaviour
         if (messageTimeLeft > 0)
         {
             showMessageBox = true;
-            messageTimeLeft -= Time.deltaTime;
+            messageTimeLeft -= Time.unscaledDeltaTime;
         }
         else
         {

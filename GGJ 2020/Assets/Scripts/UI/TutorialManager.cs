@@ -37,9 +37,20 @@ public class TutorialManager : MonoBehaviour
     public ControlsTutorial controlTutState;
     private float controlTutTimer;
 
+    public enum WinTutorial
+    {
+        Start,
+        Trigger,
+        ShowingMessage,
+        End
+    }
+    public WinTutorial winTutState;
+    private float winTutTimer = 0.0f;
+
     void Start()
     {
         mBox = FindObjectOfType<MessageBox>();
+        //controlTutState = ControlsTutorial.End;
     }
 
 
@@ -68,7 +79,7 @@ public class TutorialManager : MonoBehaviour
         {
             // Drag Object Tutorial
             modTutTimer += Time.unscaledDeltaTime;
-            if (modTutTimer >= 1.5f)
+            if (modTutTimer >= 2.0f)
             {
                 StartModTutorial();
             }
@@ -90,7 +101,7 @@ public class TutorialManager : MonoBehaviour
             }
             if (controlTutTimer >= 1.5f)
             {
-                StartControlsTutorial();
+                //StartControlsTutorial();
             }
             if (controlTutState == ControlsTutorial.Trigger)
             {
@@ -101,15 +112,28 @@ public class TutorialManager : MonoBehaviour
             {
                 controlTutState = ControlsTutorial.End;
             }
+
+            // Win Tutorial
+            if (modTutState == ModTutorial.End)
+            {
+                winTutTimer += Time.unscaledDeltaTime;
+            }
+            if (winTutTimer >= 1.5f)
+            {
+                StartWinTutorial();
+            }
+            if (winTutState == WinTutorial.Trigger)
+            {
+                string wordNum = GlobalData.NumberToWords(FindObjectOfType<ProgressBar>().maxBits);
+                mBox.SendMessage("Power up your ship by collecting " + wordNum + " gold Warp Cores.", 4.0f);
+                winTutState = WinTutorial.ShowingMessage;
+            }
+            if (controlTutTimer >= 5.5f)
+            {
+                winTutState = WinTutorial.End;
+            }
         }
 
-
-        /*
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EndModTutorial();
-        }
-        */
     }
 
     public void StartNameTutorial()
@@ -142,6 +166,14 @@ public class TutorialManager : MonoBehaviour
         if (controlTutState == ControlsTutorial.Start)
         {
             controlTutState = ControlsTutorial.Trigger;
+        }
+    }
+
+    public void StartWinTutorial()
+    {
+        if (winTutState == WinTutorial.Start)
+        {
+            winTutState = WinTutorial.Trigger;
         }
     }
 }
