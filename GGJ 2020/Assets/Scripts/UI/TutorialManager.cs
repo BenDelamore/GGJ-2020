@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class TutorialManager : MonoBehaviour
 {
     private MessageBox mBox;
+    private CanvasGroup hudCanvas;
 
     public enum NameTutorial
     {
@@ -51,6 +54,11 @@ public class TutorialManager : MonoBehaviour
     {
         mBox = FindObjectOfType<MessageBox>();
         //controlTutState = ControlsTutorial.End;
+
+        if (GlobalData.curScene != "TitleScreen")
+        {
+            hudCanvas = GameObject.Find("HUD").GetComponent<CanvasGroup>();
+        }
     }
 
 
@@ -126,6 +134,7 @@ public class TutorialManager : MonoBehaviour
             {
                 string wordNum = GlobalData.NumberToWords(FindObjectOfType<ProgressBar>().maxBits);
                 mBox.SendMessage("Power up your ship by collecting " + wordNum + " gold Warp Cores.", 4.0f);
+                Invoke("ShowHud", 1.0f);
                 winTutState = WinTutorial.ShowingMessage;
             }
             if (controlTutTimer >= 5.5f)
@@ -175,5 +184,10 @@ public class TutorialManager : MonoBehaviour
         {
             winTutState = WinTutorial.Trigger;
         }
+    }
+
+    private void ShowHud()
+    {
+        hudCanvas.DOFade(1.0f, 1.0f);
     }
 }
