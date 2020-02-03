@@ -680,6 +680,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1650235087}
     m_Modifications:
+    - target: {fileID: 3054560328786646139, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054560328786646139, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054560328786646139, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054560328786646139, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281499476503726654, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765539440944411611, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4218383844596138552, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
         type: 3}
       propertyPath: m_Name
@@ -795,6 +825,31 @@ PrefabInstance:
       propertyPath: ship
       value: 
       objectReference: {fileID: 933651053}
+    - target: {fileID: 7787368089866657474, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787368089866657474, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787368089866657474, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787368089866657474, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787368089866657474, guid: 09c77b4bd0a2d6a47b66218cd9e30a55,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c77b4bd0a2d6a47b66218cd9e30a55, type: 3}
 --- !u!1 &1177755879 stripped
