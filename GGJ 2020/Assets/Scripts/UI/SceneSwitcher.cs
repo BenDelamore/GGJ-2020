@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class SceneSwitcher : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class SceneSwitcher : MonoBehaviour
 
     void Update()
     {
-        fadeTimeCur = Mathf.MoveTowards(fadeTimeCur, 0f, Time.deltaTime);
+        fadeTimeCur = Mathf.MoveTowards(fadeTimeCur, 0f, Time.unscaledDeltaTime);
         if (fadeTimeCur != 0)
         {
             isFading = true;
@@ -99,7 +100,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void SetSeed()
     {
-        var input = GameObject.Find("InputField").GetComponent<InputField>();
+        var input = GameObject.Find("NameField").GetComponent<TMP_InputField>();
 
         if (input.text != "")
         {

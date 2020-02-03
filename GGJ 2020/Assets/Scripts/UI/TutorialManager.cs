@@ -50,12 +50,11 @@ public class TutorialManager : MonoBehaviour
         {
             if (nameTutState != NameTutorial.Start && nameTutState != NameTutorial.End)
             {
-                nameTutorialTimer += Time.deltaTime;
+                nameTutorialTimer += Time.unscaledDeltaTime;
             }
-            if (nameTutorialTimer >= 3.0f && nameTutState == NameTutorial.EnteringName)
+            if (nameTutorialTimer >= 0.5f && nameTutState == NameTutorial.EnteringName)
             {
                 mBox.SendMessage("Your name will be used as a seed for the game's generation!", 5.0f);
-                Debug.Log("Testing message");
                 nameTutState = NameTutorial.ShowingMessage;
             }
             if (nameTutorialTimer >= 8.0f && nameTutState == NameTutorial.ShowingMessage)
@@ -68,8 +67,8 @@ public class TutorialManager : MonoBehaviour
         if (GlobalData.curScene != "TitleScreen")
         {
             // Drag Object Tutorial
-            modTutTimer += Time.deltaTime;
-            if (modTutTimer >= 2.5f)
+            modTutTimer += Time.unscaledDeltaTime;
+            if (modTutTimer >= 1.5f)
             {
                 StartModTutorial();
             }
@@ -87,7 +86,7 @@ public class TutorialManager : MonoBehaviour
             // Controls Tutorial
             if (modTutState == ModTutorial.End)
             {
-                controlTutTimer += Time.deltaTime;
+                controlTutTimer += Time.unscaledDeltaTime;
             }
             if (controlTutTimer >= 1.5f)
             {
@@ -95,7 +94,7 @@ public class TutorialManager : MonoBehaviour
             }
             if (controlTutState == ControlsTutorial.Trigger)
             {
-                mBox.SendMessage("Press W to boost.\nPress Q and E to rotate.", 5.0f);
+                mBox.SendMessage("Press W to boost.\nPress Q or E to rotate.", 4.0f);
                 controlTutState = ControlsTutorial.ShowingMessage;
             }
             if (controlTutTimer >= 5.5f)
