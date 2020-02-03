@@ -7,74 +7,64 @@ public class EnvironmentSpawnScript : MonoBehaviour
     public string playerName;
     private float seed;
     private int iSeed = 0;
-    private float density = 0.025f; // one item per 4 square units
-    private float spawnSize = 100.0f;
+    private float density = 0.004f; // one item per 8 square units
+    private float spawnSize = 200.0f;
 
     public GameObject Scrap;
     public GameObject Thruster;
     public GameObject Shield;
     public GameObject Gyroscope;
-    public GameObject HullExpansion;
+    public GameObject WarpCore;
 
     // Start is called before the first frame update
     void Start()
     {
         // generates seed
         seed = 1.0f;
-        string charactersLeft = playerName;
+        string charactersLeft = GlobalData.seed;
         while (charactersLeft.Length >= 1)
         {
             int charInt = charactersLeft[0];
             seed *= charInt;
             charactersLeft = charactersLeft.Remove(0, 1);
         }
-        iSeed = Mathf.RoundToInt(seed);
+        iSeed = Mathf.RoundToInt(seed % 100000);
         Random.InitState(iSeed);
         float totalItemsToSpawn = spawnSize * spawnSize * density;
         for (int i = 0; i < Mathf.CeilToInt(totalItemsToSpawn); i++)
         {
-
-            // if it can be divided by 4, it's an asteroid.
-            // unless it can be divided by 5, then it's a thruster.
-            // unless it can be divided by 7, then it's a shield.
-            // unless it can be divided by 9, then it's a gyroscope.
-            // unless it can be divided by 11, then it's a hull expansion.
-            // if none are true, it's scrap
-
-            if (i % 4 == 0)
-            {
-                // Asteroid
-                if ((iSeed + i) % 4 == 0)
-                {
-                    // large asteroid
-                }
-            }
-            else if (i % 5 == 0)
+            if (i % 5 == 0)
             {
                 // Thruster
-                Debug.Log("Spawning Thruster with id #" + i);
+                //Debug.Log("Spawning Thruster with id #" + i);
                 GameObject newThruster = GameObject.Instantiate(Thruster);
                 newThruster.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 7 == 0)
             {
                 // Shield
-                Debug.Log("Spawning Shield with id #" + i);
+                //Debug.Log("Spawning Shield with id #" + i);
                 GameObject newShield = GameObject.Instantiate(Shield);
                 newShield.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 9 == 0)
             {
                 // Gyroscope
+                //Debug.Log("Spawning Gyroscope with id #" + i);
+                GameObject newGyroscope = GameObject.Instantiate(Gyroscope);
+                newGyroscope.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else if (i % 11 == 0)
             {
-                // Hull Expansion
+                // Warp Core
+                //Debug.Log("Spawning Warp Core with id #" + i);
+                GameObject newWarpCore = GameObject.Instantiate(WarpCore);
+                newWarpCore.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }
             else
             {
                 // Scrap
-                Debug.Log("Spawning Scrap with id #" + i);
+                //Debug.Log("Spawning Scrap with id #" + i);
                 GameObject newScrap = GameObject.Instantiate(Scrap);
                 newScrap.transform.SetPositionAndRotation(GeneratePosition(i), Quaternion.Euler(0, 0, GenerateOrientation(i)));
             }

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4e6594fa2ed5dab42a45da525f6c4e0c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - UIelement: {instanceID: 0}
+  - rootNode: {instanceID: 0}
+  - popOff: {fileID: 8300000, guid: be44526df664fa74ea415a3e52b5dcf0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

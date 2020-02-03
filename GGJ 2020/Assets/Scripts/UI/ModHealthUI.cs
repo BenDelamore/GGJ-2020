@@ -17,17 +17,18 @@ public class ModHealthUI : MonoBehaviour
     {
         healthRing = gameObject.transform.Find("HealthRingFore").GetComponent<Image>();
         canvas = GetComponent<CanvasGroup>();
+        transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
         Hide();
     }
 
 
     void Update()
     {
-        if (Module.GetComponent<ThrusterScript>())
+        if (Module.GetComponent<moduleBehaviour>())
         {
-            healthValue = Module.GetComponent<ThrusterScript>().health;
+            healthValue = Module.GetComponent<moduleBehaviour>().health;
         }
-        healthRing.fillAmount = healthValue / 100f;
+        healthRing.fillAmount = healthValue * 0.01f;
 
         if (showHealth && !healthVisible)
         {
@@ -45,18 +46,21 @@ public class ModHealthUI : MonoBehaviour
 
     void Show()
     {
+        canvas.DOKill(true);
+        transform.DOKill(true);
         canvas.DOFade(1f, 0.3f);
-        transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        transform.DOScale(0.75f, 0.3f).SetEase(Ease.OutBack);
 
-        Debug.Log("Showing Module Health");
+        //Debug.Log("Showing Module Health");
     }
 
     void Hide()
     {
         canvas.DOKill(true);
+        transform.DOKill(true);
         canvas.DOFade(0f, 0.3f);
         transform.DOScale(0f, 0.5f).SetEase(Ease.InQuad);
 
-        Debug.Log("Hiding Module Health");
+        //Debug.Log("Hiding Module Health");
     }
 }

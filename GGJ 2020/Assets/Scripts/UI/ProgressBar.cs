@@ -15,6 +15,8 @@ public class ProgressBar : MonoBehaviour
     public Sprite spriteOn;
     public Sprite spriteOff;
 
+    private ShipScript ship;
+
     void Start()
     {
         bitIndicator = new GameObject[maxBits];
@@ -29,11 +31,14 @@ public class ProgressBar : MonoBehaviour
 
             bitSprite[i] = bitIndicator[i].GetComponent<Image>();
         }
+
+        ship = GameObject.Find("Core").GetComponent<ShipScript>();
     }
 
 
     void Update()
     {
+        collectedBits = ship.warpCoreCount;
         collectedBits = Mathf.Clamp(collectedBits, 0, maxBits);
 
         for (int i = 0; i < maxBits; i++)

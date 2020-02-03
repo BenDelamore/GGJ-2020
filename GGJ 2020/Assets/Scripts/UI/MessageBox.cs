@@ -52,6 +52,7 @@ public class MessageBox : MonoBehaviour
             showMessageBox = false;
         }
 
+        /*
         tempCountdown -= Time.deltaTime;
 
         if (tempCountdown <=0 && !tempShow)
@@ -59,6 +60,7 @@ public class MessageBox : MonoBehaviour
             SendMessage("If you are seeing this message then this is working as expected", 5f);
             tempShow = true;
         }
+        */
     }
 
     public void SendMessage(string text, float duration)
@@ -68,40 +70,42 @@ public class MessageBox : MonoBehaviour
     }
 
     // Messagebox Animations and Transitions
-    void Begin()
+    private void Begin()
     {
         ShowBox();
         ShowMessage();
         Debug.Log("Showing Messagebox");
     }
 
-    void End()
+    private void End()
     {
         HideBox();
         HideMessage();
         Debug.Log("Hiding Messagebox");
     }
 
-    void ShowBox()
+    private void ShowBox()
     {
         rTransform.DOKill(true);
+        canvas.DOKill(true);
         canvas.DOFade(1f, 0.1f);
         rTransform.DOSizeDelta(new Vector2(670f, 128f), 0.5f).SetEase(Ease.OutQuint);
     }
 
-    void ShowMessage()
+    private void ShowMessage()
     {
 
     }
 
-    void HideBox()
+    private void HideBox()
     {
         rTransform.DOKill(true);
+        canvas.DOKill(true);
         canvas.DOFade(0f, 0.25f).SetEase(Ease.OutQuad);
         rTransform.DOSizeDelta(new Vector2(150f, 128f), 0.4f).SetEase(Ease.OutQuad);
     }
 
-    void HideMessage()
+    private void HideMessage()
     {
 
     }

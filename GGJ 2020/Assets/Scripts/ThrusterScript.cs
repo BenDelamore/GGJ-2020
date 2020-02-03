@@ -2,54 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrusterScript : MonoBehaviour
+public class ThrusterScript : moduleBehaviour
 {
     public float thrustForce;
-    public float health;
-    public GameObject UIelement;
-
-    private void Start()
-    {
-        health = 100.0f;
-        UIelement = transform.GetChild(0).gameObject;
-        UIelement.transform.SetParent(GameObject.Find("Canvas").transform);
-        UIelement.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-    }
+    public string control = "w";
+    public AudioClip thrusterSound;
+    public GameObject cam;
 
     private void Update()
     {
         Vector3 worldToScreen = Camera.main.WorldToScreenPoint(transform.position);
         GameObject canvas = GameObject.Find("Canvas");
-        //Vector3 worldToScreen = WorldToCanvasPosition(canvas.GetComponent<Canvas>(), canvas.GetComponent<RectTransform>(), Camera.main, transform.position);
+        worldToScreen.x -= canvas.GetComponent<Canvas>().pixelRect.width * 0.5f;
+        worldToScreen.y -= canvas.GetComponent<Canvas>().pixelRect.height * 0.5f;
         UIelement.transform.localPosition = worldToScreen;
-    }
 
-    Vector2 WorldToCanvasPosition(Canvas canvas, RectTransform canvasRect, Camera camera, Vector3 position)
-    {
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(camera, position);
-        Vector2 result;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : camera, out result);
-        return canvas.transform.TransformPoint(result);
-    }
-
-
-    private void OnMouseEnter()
-    {
-        UIelement.transform.GetComponent<ModHealthUI>().showHealth = true;
-    }
-
-    private void OnMouseExit()
-    {
-        UIelement.transform.GetComponent<ModHealthUI>().showHealth = false;
+        if (rootNode)
+        {
+            if (Input.GetKey(control))
+            {
+                Thrust();
+            }
+            else {
+                foreach(Transform child in transform) {
+                    if (child.name.Contains("Audio")) {
+                        child.GetComponent<AudioSource>().Stop();
+                        Camera.main.GetComponent<AudioController>().FadeAudio(child.GetComponent<AudioSource>(), 0.0f, 0.5f);
+                    }
+                }
+            }
+            //if (Input.GetKey("w") && transform.localRotation.eulerAngles.z <= 5.0f && transform.localRotation.eulerAngles.z >= -5.0f)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("w") && transform.forward == GameObject.Find("Core").transform.forward)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("a") && transform.localRotation.eulerAngles.z <= 95.0f && transform.localRotation.eulerAngles.z >= 85.0f)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("a") && transform.forward == -GameObject.Find("Core").transform.right)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("s") && transform.localRotation.eulerAngles.z <= -175.0f && transform.localRotation.eulerAngles.z >= 175.0f)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("s") && transform.forward == -GameObject.Find("Core").transform.forward)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("d") && transform.localRotation.eulerAngles.z <= -85.0f && transform.localRotation.eulerAngles.z >= -95.0f)
+            //{
+            //    Thrust();
+            //}
+            //if (Input.GetKey("d") && transform.forward == GameObject.Find("Core").transform.right)
+            //{
+            //    Thrust();
+            //}
+        }
     }
 
     public void Thrust()
     {
+        cam.GetComponent<AudioController>().PlaySoundAt(thrusterSound,transform,0.5f);
+
         GetComponent<Rigidbody2D>().AddForce(transform.up * thrustForce * Time.deltaTime);
-        health -= 0.025f;
+        health -= 0.125f;
         if (health <= 0.0f)
         {
-            this.gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
