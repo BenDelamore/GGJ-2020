@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class TutorialManager : MonoBehaviour
 {
     private MessageBox mBox;
+    private CanvasGroup hudCanvas;
 
     public enum NameTutorial
     {
@@ -37,9 +40,25 @@ public class TutorialManager : MonoBehaviour
     public ControlsTutorial controlTutState;
     private float controlTutTimer;
 
+    public enum WinTutorial
+    {
+        Start,
+        Trigger,
+        ShowingMessage,
+        End
+    }
+    public WinTutorial winTutState;
+    private float winTutTimer = 0.0f;
+
     void Start()
     {
         mBox = FindObjectOfType<MessageBox>();
+        //controlTutState = ControlsTutorial.End;
+
+        if (GlobalData.curScene != "TitleScreen")
+        {
+            hudCanvas = GameObject.Find("HUD").GetComponent<CanvasGroup>();
+        }
     }
 
 
@@ -50,12 +69,11 @@ public class TutorialManager : MonoBehaviour
         {
             if (nameTutState != NameTutorial.Start && nameTutState != NameTutorial.End)
             {
-                nameTutorialTimer += Time.deltaTime;
+                nameTutorialTimer += Time.unscaledDeltaTime;
             }
-            if (nameTutorialTimer >= 3.0f && nameTutState == NameTutorial.EnteringName)
+            if (nameTutorialTimer >= 0.5f && nameTutState == NameTutorial.EnteringName)
             {
                 mBox.SendMessage("Your name will be used as a seed for the game's generation!", 5.0f);
-                Debug.Log("Testing message");
                 nameTutState = NameTutorial.ShowingMessage;
             }
             if (nameTutorialTimer >= 8.0f && nameTutState == NameTutorial.ShowingMessage)
@@ -68,8 +86,8 @@ public class TutorialManager : MonoBehaviour
         if (GlobalData.curScene != "TitleScreen")
         {
             // Drag Object Tutorial
-            modTutTimer += Time.deltaTime;
-            if (modTutTimer >= 2.5f)
+            modTutTimer += Time.unscaledDeltaTime;
+            if (modTutTimer >= 2.0f)
             {
                 StartModTutorial();
             }
@@ -87,30 +105,44 @@ public class TutorialManager : MonoBehaviour
             // Controls Tutorial
             if (modTutState == ModTutorial.End)
             {
-                controlTutTimer += Time.deltaTime;
+                controlTutTimer += Time.unscaledDeltaTime;
             }
             if (controlTutTimer >= 1.5f)
             {
-                StartControlsTutorial();
+                //StartControlsTutorial();
             }
             if (controlTutState == ControlsTutorial.Trigger)
             {
-                mBox.SendMessage("Press W to boost.\nPress Q and E to rotate.", 5.0f);
+                mBox.SendMessage("Press W to boost.\nPress Q or E to rotate.", 4.0f);
                 controlTutState = ControlsTutorial.ShowingMessage;
             }
             if (controlTutTimer >= 5.5f)
             {
                 controlTutState = ControlsTutorial.End;
             }
+
+            // Win Tutorial
+            if (modTutState == ModTutorial.End)
+            {
+                winTutTimer += Time.unscaledDeltaTime;
+            }
+            if (winTutTimer >= 1.5f)
+            {
+                StartWinTutorial();
+            }
+            if (winTutState == WinTutorial.Trigger)
+            {
+                string wordNum = GlobalData.NumberToWords(FindObjectOfType<ProgressBar>().maxBits);
+                mBox.SendMessage("Power up your ship by collecting " + wordNum + " gold Warp Cores.", 4.0f);
+                Invoke("ShowHud", 1.0f);
+                winTutState = WinTutorial.ShowingMessage;
+            }
+            if (controlTutTimer >= 5.5f)
+            {
+                winTutState = WinTutorial.End;
+            }
         }
 
-
-        /*
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EndModTutorial();
-        }
-        */
     }
 
     public void StartNameTutorial()
@@ -144,5 +176,18 @@ public class TutorialManager : MonoBehaviour
         {
             controlTutState = ControlsTutorial.Trigger;
         }
+    }
+
+    public void StartWinTutorial()
+    {
+        if (winTutState == WinTutorial.Start)
+        {
+            winTutState = WinTutorial.Trigger;
+        }
+    }
+
+    private void ShowHud()
+    {
+        hudCanvas.DOFade(1.0f, 1.0f);
     }
 }

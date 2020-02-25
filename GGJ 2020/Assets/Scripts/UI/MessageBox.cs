@@ -17,9 +17,6 @@ public class MessageBox : MonoBehaviour
     private Text messageText;
     private CanvasGroup messageCanvas;
 
-    private float tempCountdown = 5f;
-    private bool tempShow;
-
     void Start()
     {
         canvas = GetComponent<CanvasGroup>();
@@ -45,22 +42,12 @@ public class MessageBox : MonoBehaviour
         if (messageTimeLeft > 0)
         {
             showMessageBox = true;
-            messageTimeLeft -= Time.deltaTime;
+            messageTimeLeft -= Time.unscaledDeltaTime;
         }
         else
         {
             showMessageBox = false;
         }
-
-        /*
-        tempCountdown -= Time.deltaTime;
-
-        if (tempCountdown <=0 && !tempShow)
-        {
-            SendMessage("If you are seeing this message then this is working as expected", 5f);
-            tempShow = true;
-        }
-        */
     }
 
     public void SendMessage(string text, float duration)
